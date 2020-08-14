@@ -2,7 +2,7 @@
 #include <iostream>
 
 Program::Program() {
-	window = new sf::RenderWindow(sf::VideoMode(640, 480), "Render Window");
+	window = new sf::RenderWindow(sf::VideoMode(k_WindowWidth, k_WindowHeight), "RenderWindow");
 	//window->setFramerateLimit(60);
 }
 
@@ -26,7 +26,7 @@ void Program::HandleEvents() {
 
 void Program::Update(double &deltaTime) {
 	//std::cout << "deltaTime = " << (float)deltaTime << "s" << std::endl;
-	std::cout << "FPS = " << (int)(1 / deltaTime) << std::endl;
+	//std::cout << "FPS = " << (int)(1 / deltaTime) << std::endl;
 }
 
 void Program::Draw() {

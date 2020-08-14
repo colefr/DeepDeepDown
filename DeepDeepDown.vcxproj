@@ -146,11 +146,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Program.cpp" />
     <ClCompile Include="src\Tile.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GlobalConstants.hpp" />
+    <ClInclude Include="src\Player.hpp" />
     <ClInclude Include="src\Program.hpp" />
     <ClInclude Include="src\Tile.hpp" />
     <ClInclude Include="src\World.hpp" />
