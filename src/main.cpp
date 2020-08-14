@@ -1,5 +1,6 @@
 //SFML Includes
 #include "SFML/Graphics.hpp"
+#include "SFML/System/Clock.hpp"
 
 //stdlib Includes
 #include <iostream>
@@ -11,12 +12,21 @@ int main() {
 	std::cout << "Hello, Console!" << std::endl;
 
 	Program program;
+	sf::Clock clock;
+	sf::Time deltaClock;
+	double deltaTime;
 
 	while (program.RenderWindowIsOpen()) {
-		
+		// get the time it took to draw the last frame as seconds
+		deltaTime = deltaClock.asSeconds();
+
 		program.HandleEvents();
-		program.Update(0.0);
+		program.Update(deltaTime);
 		program.Draw();
+
+		// restart the clock, simulatenously storing the time it took
+		// to draw the last frame
+		deltaClock = clock.restart();
 	}
 
 	return EXIT_SUCCESS;
