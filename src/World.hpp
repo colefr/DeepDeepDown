@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Tile.hpp"
+#include "Player.hpp"
 
 class World {
 public:
@@ -11,5 +12,5 @@ public:
 	void Draw(sf::RenderWindow* window);
 
 private:
-
+	Player* player;
 };

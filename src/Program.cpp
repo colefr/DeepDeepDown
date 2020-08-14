@@ -2,12 +2,15 @@
 #include <iostream>
 
 Program::Program() {
-	window = new sf::RenderWindow(sf::VideoMode(k_WindowWidth, k_WindowHeight), "RenderWindow");
-	//window->setFramerateLimit(60);
+	window = new sf::RenderWindow(sf::VideoMode(640, 480), "RenderWindow");
+	window->setFramerateLimit(60);
+
+	world = new World();
 }
 
 Program::~Program() {
 	delete window;
+	delete world;
 }
 
 void Program::HandleEvents() {
@@ -27,10 +30,12 @@ void Program::HandleEvents() {
 void Program::Update(double &deltaTime) {
 	//std::cout << "deltaTime = " << (float)deltaTime << "s" << std::endl;
 	//std::cout << "FPS = " << (int)(1 / deltaTime) << std::endl;
+	world->Update(deltaTime);
 }
 
 void Program::Draw() {
 	window->clear();
+	world->Draw(window);
 	window->display();
 }
 
