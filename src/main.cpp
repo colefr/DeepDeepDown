@@ -1,20 +1,22 @@
+//SFML Includes
 #include "SFML/Graphics.hpp"
+
+//stdlib Includes
 #include <iostream>
+
+//local includes
+#include "Program.hpp"
 
 int main() {
 	std::cout << "Hello, Console!" << std::endl;
 
-	sf::RenderWindow window(sf::VideoMode(640, 480), "Empty Window");
+	Program program;
 
-	while (window.isOpen()) {
+	while (program.RenderWindowIsOpen()) {
 		
-		sf::Event event;
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-		
-		window.display();
+		program.HandleEvents();
+		program.Update(0.0);
+		program.Draw();
 	}
 
 	return EXIT_SUCCESS;
