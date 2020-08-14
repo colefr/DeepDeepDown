@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "World.hpp"
 
 class Program {
 public:
@@ -7,7 +8,7 @@ public:
 	~Program();
 
 	void HandleEvents();
-	void Update(double deltaTime);
+	void Update(double &deltaTime);
 	void Draw();
 
 	bool RenderWindowIsOpen();

@@ -24,7 +24,7 @@ void Program::HandleEvents() {
 	}
 }
 
-void Program::Update(double deltaTime) {
+void Program::Update(double &deltaTime) {
 	//std::cout << "deltaTime = " << (float)deltaTime << "s" << std::endl;
 	std::cout << "FPS = " << (int)(1 / deltaTime) << std::endl;
 }
