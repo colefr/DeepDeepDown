@@ -1,7 +1,7 @@
 #include "World.hpp"
 
 World::World() {
-	player = new Player();
+	player = new Player();	
 }
 
 World::~World() {

@@ -4,8 +4,6 @@
 #include <string>
 #include <iostream>
 
-const std::string imgPath = "assets/img/player.png";
-
 class Player {
 public:
 	Player();
@@ -19,4 +17,6 @@ private:
 	sf::Texture* playerTexture;
 
 	float bobTime = 0;
+
+	const std::string imgPath = "assets/img/player.png";
 };
