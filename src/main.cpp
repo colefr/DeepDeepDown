@@ -11,23 +11,26 @@
 int main() {
 	std::cout << "Hello, Console!" << std::endl;
 
-	Program program;
+	Program* program = new Program();
+
 	sf::Clock clock;
 	sf::Time deltaClock;
 	double deltaTime;
 
-	while (program.RenderWindowIsOpen()) {
+	while (program->RenderWindowIsOpen()) {
 		// get the time it took to draw the last frame as seconds
 		deltaTime = deltaClock.asSeconds();
 
-		program.HandleEvents();
-		program.Update(deltaTime);
-		program.Draw();
+		program->HandleEvents();
+		program->Update(deltaTime);
+		program->Draw();
 
 		// restart the clock, simulatenously storing the time it took
 		// to draw the last frame
 		deltaClock = clock.restart();
 	}
+
+	delete program;
 
 	return EXIT_SUCCESS;
 }

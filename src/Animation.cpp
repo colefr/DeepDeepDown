@@ -32,7 +32,7 @@ void Animation::Update(double& deltaTime) {
 	if (isPlaying && frameRate != 0) {
 		elapsedTime += deltaTime;
 
-		if (elapsedTime >= 1.0 / (2 * frameRate)) {
+		if (elapsedTime >= 1.0f / (2 * frameRate)) {
 
 			if (frameIndex <= frameCount) frameIndex++;
 			else frameIndex = 0;
