@@ -1,3 +1,5 @@
+#pragma once
+
 //SFML Includes
 #include "SFML/Graphics.hpp"
 #include "SFML/System/Clock.hpp"

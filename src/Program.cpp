@@ -2,7 +2,7 @@
 #include <iostream>
 
 Program::Program() {
-	window = new sf::RenderWindow(sf::VideoMode(640, 480), "RenderWindow");
+	window = new sf::RenderWindow(sf::VideoMode(640, 480), "Render Window");
 	window->setFramerateLimit(60);
 	window->setMouseCursorVisible(false);
 

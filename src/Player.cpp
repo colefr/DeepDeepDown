@@ -17,7 +17,7 @@ void Player::Update(double& deltaTime) {
 
 	// This bit here just adds a little "bobbing" animation
 	bobTime += (2 * (float)deltaTime);
-	animation->GetSprite()->move(sf::Vector2f(0.0f, 0.05 * -sinf(bobTime)));
+	animation->GetSprite()->move(sf::Vector2f(0.0f, 0.05f * -sinf(bobTime)));
 }
 
 void Player::Draw(sf::RenderWindow* window) {

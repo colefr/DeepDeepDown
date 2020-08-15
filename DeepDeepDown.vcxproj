@@ -159,7 +159,6 @@
   <ItemGroup>
     <ClInclude Include="src\Animation.hpp" />
     <ClInclude Include="src\Cursor.hpp" />
-    <ClInclude Include="src\GlobalConstants.hpp" />
     <ClInclude Include="src\Player.hpp" />
     <ClInclude Include="src\Program.hpp" />
     <ClInclude Include="src\Tile.hpp" />

@@ -1,7 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "World.hpp"
-#include "GlobalConstants.hpp"
 
 class Program {
 public:

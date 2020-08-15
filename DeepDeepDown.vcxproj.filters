@@ -47,9 +47,6 @@
     <ClInclude Include="src\Tile.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\GlobalConstants.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Player.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
