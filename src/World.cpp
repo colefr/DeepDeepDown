@@ -39,6 +39,7 @@ void World::Update(double& deltaTime, sf::Window* window) {
 
 	cursor->Update(deltaTime, window);
 
+	// Left click "breaks" a tile
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		Tile* tileToUpdate = CheckTiles(cursor->GetPosition());
 		if (tileToUpdate != nullptr) {
@@ -72,7 +73,15 @@ void World::Update(double& deltaTime, sf::Window* window) {
 			tileToUpdate->Hide();
 		}
 		//std::cout << "Click! at (" << cursor->GetPosition().x << ", " << cursor->GetPosition().y << ")" << std::endl;		
-	}	
+	}
+
+	// Right click "places" a tile
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+		Tile* tileToUpdate = CheckTiles(cursor->GetPosition());
+		if (tileToUpdate != nullptr) {
+			tileToUpdate->Show();
+		}
+	}
 }
 
 void World::Draw(sf::RenderWindow* window) {
