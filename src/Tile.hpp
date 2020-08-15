@@ -11,6 +11,9 @@ public:
 	void Update(double& deltaTime);
 	void Draw(sf::RenderWindow* window);
 
+	sf::Vector2i GetPosition();
+	Tile* GetTile();
+
 private:
 	unsigned short tileID;
 	sf::Vector2i position;

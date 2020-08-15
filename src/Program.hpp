@@ -2,7 +2,6 @@
 #include "SFML/Graphics.hpp"
 #include "World.hpp"
 #include "GlobalConstants.hpp"
-#include "Cursor.hpp"
 
 class Program {
 public:
@@ -18,5 +17,4 @@ public:
 private:
 	sf::RenderWindow* window;
 	World* world;
-	Cursor* cursor;
 };

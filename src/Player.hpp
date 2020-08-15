@@ -13,6 +13,8 @@ public:
 	void Update(double& deltaTime);
 	void Draw(sf::RenderWindow* window);
 
+	sf::Vector2f GetPosition();
+
 private:
 	Animation* animation;
 	float bobTime = 0;
