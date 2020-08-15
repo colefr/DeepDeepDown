@@ -27,6 +27,7 @@ World::~World() {
 	}
 
 	delete tiles;
+	delete cursor;
 }
 
 void World::Update(double& deltaTime, sf::Window* window) {
