@@ -6,16 +6,19 @@ World::World() {
 	player = new Player();
 	const std::string imgPath = "assets/img/stone.png";
 
-	tiles = new std::vector<Tile*>;
+	tileTexture = new sf::Texture();
+	tileTexture->loadFromFile(imgPath);
 
-	sf::IntRect stoneTileRect = sf::IntRect(0, 0, 32, 32);
+	tiles = new std::vector<Tile*>;	
 
 	// Starting Tiles
-	tiles->push_back(new Tile(imgPath, stoneTileRect, sf::Vector2i((int)player->GetPosition().x + 32, (int)player->GetPosition().y), 1));
-	tiles->push_back(new Tile(imgPath, stoneTileRect, sf::Vector2i((int)player->GetPosition().x, (int)player->GetPosition().y + 32), 1));
-	tiles->push_back(new Tile(imgPath, stoneTileRect, sf::Vector2i((int)player->GetPosition().x - 32, (int)player->GetPosition().y), 1));
-	tiles->push_back(new Tile(imgPath, stoneTileRect, sf::Vector2i((int)player->GetPosition().x, (int)player->GetPosition().y - 32), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, sf::Vector2i((int)player->GetPosition().x, (int)player->GetPosition().y), 0));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, sf::Vector2i((int)player->GetPosition().x + 32, (int)player->GetPosition().y), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, sf::Vector2i((int)player->GetPosition().x, (int)player->GetPosition().y + 32), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, sf::Vector2i((int)player->GetPosition().x - 32, (int)player->GetPosition().y), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, sf::Vector2i((int)player->GetPosition().x, (int)player->GetPosition().y - 32), 1));
 
+	tiles->at(0)->Hide();
 	std::cout << tiles->size() << " tiles." << std::endl;
 }
 
@@ -27,6 +30,7 @@ World::~World() {
 	}
 
 	delete tiles;
+	delete tileTexture;
 	delete cursor;
 }
 
@@ -39,15 +43,35 @@ void World::Update(double& deltaTime, sf::Window* window) {
 		Tile* tileToUpdate = CheckTiles(cursor->GetPosition());
 		if (tileToUpdate != nullptr) {
 			//std::cout << "Clicked a Tile!" << std::endl;
-		}
-		//std::cout << "Click! at (" << cursor->GetPosition().x << ", " << cursor->GetPosition().y << ")" << std::endl;
 
-		//On click
-		//-> Check what tile is under the mouse cursor
-		//	--> If it's a void tile, do nothing
-		//	--> If it's a stone tile, turn it into an air tile and
-		//			spawn stone tiles orthogonally where there are other
-		//			void tiles (i.e. don't fill in "air" tiles).
+			// This checks if there are tiles around the tile clicked on. If yes, no nothing.
+			// If not, then replace empty spaces with new stone tiles.
+
+			// Check Up
+			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2i(0, -32)) == nullptr) {
+				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2i(0,-32), 1));
+			}
+
+			// Check Down
+			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2i(0, 32)) == nullptr) {
+				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2i(0, 32), 1));
+			}
+
+			// Check Left
+			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2i(-32, 0)) == nullptr) {
+				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2i(-32, 0), 1));
+			}
+
+			//Check Right
+			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2i(32, 0)) == nullptr) {
+				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2i(32, 0), 1));
+			}
+
+			// Hide the tile, but keep it there, both for the null-tile check, and also so it
+			// can be manipulated in the future
+			tileToUpdate->Hide();
+		}
+		//std::cout << "Click! at (" << cursor->GetPosition().x << ", " << cursor->GetPosition().y << ")" << std::endl;		
 	}	
 }
 

@@ -5,7 +5,7 @@
 
 class Tile {
 public:
-	Tile(const std::string& textureFile, sf::IntRect aTextureRect, sf::Vector2i aPosition, unsigned short aTileID);
+	Tile(sf::Texture* texturePtr, sf::IntRect aTextureRect, sf::Vector2i aPosition, unsigned short aTileID);
 	~Tile();
 
 	void Update(double& deltaTime);
@@ -14,9 +14,12 @@ public:
 	sf::Vector2i GetPosition();
 	Tile* GetTile();
 
+	void Show();
+	void Hide();
+
 private:
 	unsigned short tileID;
 	sf::Vector2i position;
-	sf::Texture* texture;
 	sf::Sprite* sprite;
+	bool isVisible;
 };
