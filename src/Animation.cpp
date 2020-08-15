@@ -30,7 +30,7 @@ Animation::~Animation() {
 
 void Animation::Update(double& deltaTime) {
 	if (isPlaying && frameRate != 0) {
-		elapsedTime += deltaTime;
+		elapsedTime += (float)deltaTime;
 
 		if (elapsedTime >= 1.0f / (2 * frameRate)) {
 

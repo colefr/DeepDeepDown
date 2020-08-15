@@ -6,7 +6,6 @@ Player::Player() {
 
 	animation->GetSprite()->setOrigin(sf::Vector2f(16.0f, 16.0f));
 	animation->GetSprite()->setPosition(sf::Vector2f(320.0f, 240.0f));
-	animation->GetSprite()->setScale(sf::Vector2f(2.0f, 2.0f));
 }
 
 Player::~Player() {

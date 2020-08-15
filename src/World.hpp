@@ -2,6 +2,8 @@
 #include "SFML/Graphics.hpp"
 #include "Tile.hpp"
 #include "Player.hpp"
+#include "Tile.hpp"
+#include <vector>
 
 class World {
 public:
@@ -13,4 +15,5 @@ public:
 
 private:
 	Player* player;
+	std::vector<Tile*>* tiles;
 };
