@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "GlobalConstants.hpp"
+#include "Animation.hpp"
 #include <string>
 #include <iostream>
 
@@ -13,10 +14,7 @@ public:
 	void Draw(sf::RenderWindow* window);
 
 private:
-	sf::Sprite* playerSprite;
-	sf::Texture* playerTexture;
-
+	Animation* animation;
 	float bobTime = 0;
-
 	const std::string imgPath = "assets/img/player.png";
 };

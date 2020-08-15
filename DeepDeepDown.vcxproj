@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Cursor.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Animation.hpp" />
     <ClInclude Include="src\Cursor.hpp" />
     <ClInclude Include="src\GlobalConstants.hpp" />
     <ClInclude Include="src\Player.hpp" />
