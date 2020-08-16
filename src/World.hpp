@@ -1,6 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "Tiles/Tile.hpp"
+#include "Tiles/StaticTile.hpp"
 #include "Player.hpp"
 #include "Cursor.hpp"
 #include <vector>

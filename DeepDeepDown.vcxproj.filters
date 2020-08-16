@@ -42,6 +42,9 @@
     <ClCompile Include="src\Tiles\AnimatedTile.cpp">
       <Filter>Source Files\Tiles</Filter>
     </ClCompile>
+    <ClCompile Include="src\Tiles\StaticTile.cpp">
+      <Filter>Source Files\Tiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Program.hpp">
@@ -63,6 +66,9 @@
       <Filter>Source Files\Tiles</Filter>
     </ClInclude>
     <ClInclude Include="src\Tiles\AnimatedTile.hpp">
+      <Filter>Source Files\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tiles\StaticTile.hpp">
       <Filter>Source Files\Tiles</Filter>
     </ClInclude>
   </ItemGroup>

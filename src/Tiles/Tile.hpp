@@ -6,24 +6,20 @@
 
 class Tile {
 public:
-	Tile(sf::Vector2f aPosition, unsigned short aTileID);
-	Tile(sf::Texture* texturePtr, sf::IntRect aTextureRect, sf::Vector2f aPosition, unsigned short aTileID);
-	virtual ~Tile();
-
-	void Update(double& deltaTime);
-	void Draw(sf::RenderWindow* window);
-
 	sf::Vector2f GetPosition();
-	Tile* GetTile();
-	sf::Sprite* GetSprite();
 	bool GetVisibility();
+	
+	bool IsUnderMouseCursor(sf::Vector2f mousePos);
 
 	void Show();
 	void Hide();
 
-private:
-	unsigned short tileID;
-	sf::Vector2f position;
+	virtual void Draw(sf::RenderWindow* window);
+	virtual void Update(double& deltaTime);
+
+	Tile* GetTilePointer();
+
 	sf::Sprite* sprite;
-	bool isVisible;
+	sf::Vector2f position;
+	bool isVisible = true;
 };

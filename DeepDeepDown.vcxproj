@@ -154,6 +154,7 @@
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Program.cpp" />
     <ClCompile Include="src\Tiles\AnimatedTile.cpp" />
+    <ClCompile Include="src\Tiles\StaticTile.cpp" />
     <ClCompile Include="src\Tiles\Tile.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="src\Player.hpp" />
     <ClInclude Include="src\Program.hpp" />
     <ClInclude Include="src\Tiles\AnimatedTile.hpp" />
+    <ClInclude Include="src\Tiles\StaticTile.hpp" />
     <ClInclude Include="src\Tiles\Tile.hpp" />
     <ClInclude Include="src\World.hpp" />
   </ItemGroup>

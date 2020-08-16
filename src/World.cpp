@@ -12,11 +12,11 @@ World::World() {
 	tiles = new std::vector<Tile*>;	
 
 	// Starting Tiles
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2f(0, 0), 1));
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2f(0, -32), 1));
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2f(0, 32), 1));
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2f(-32, 0), 1));
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2f(32, 0), 1));
+	tiles->push_back(new StaticTile(player->GetPosition(), tileTexture));
+	tiles->push_back(new StaticTile(player->GetPosition() + sf::Vector2f(0, -32), tileTexture));
+	tiles->push_back(new StaticTile(player->GetPosition() + sf::Vector2f(0, 32), tileTexture));
+	tiles->push_back(new StaticTile(player->GetPosition() + sf::Vector2f(-32, 0), tileTexture));
+	tiles->push_back(new StaticTile(player->GetPosition() + sf::Vector2f(32, 0), tileTexture));
 	tiles->at(0)->Hide();
 	std::cout << tiles->size() << " tiles." << std::endl;
 }
@@ -52,22 +52,22 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 
 			// Check Up
 			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(0, -32)) == nullptr) {
-				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2f(0, -32), 1));
+				tiles->push_back(new StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(0, -32), tileTexture));
 			}
 
 			// Check Down
 			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(0, 32)) == nullptr) {
-				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2f(0, 32), 1));
+				tiles->push_back(new StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(0, 32), tileTexture));
 			}
 
 			// Check Left
 			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(-32, 0)) == nullptr) {
-				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2f(-32, 0), 1));
+				tiles->push_back(new StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(-32, 0), tileTexture));
 			}
 
 			//Check Right
 			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(32, 0)) == nullptr) {
-				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2f(32, 0), 1));
+				tiles->push_back(new StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(32, 0), tileTexture));
 			}
 
 			// Hide the tile, but keep it there, both for the null-tile check, and also so it
@@ -150,7 +150,7 @@ Tile* World::CheckTiles(sf::Vector2f aPosition)
 		if (abs(tiles->at(i)->GetPosition().x - aPosition.x) <= 16 && abs(tiles->at(i)->GetPosition().y - aPosition.y) <= 16) {
 			//std::cout << abs(tiles->at(i)->GetPosition().x - mousePos.x) << " " << abs(tiles->at(i)->GetPosition().y - mousePos.y) << std::endl;
 			//std::cout << "Clicked a Tile!" << std::endl;
-			return tiles->at(i)->GetTile();
+			return tiles->at(i)->GetTilePointer();
 		}
 
 		else continue;
