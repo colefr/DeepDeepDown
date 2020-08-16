@@ -12,13 +12,12 @@ World::World() {
 	tiles = new std::vector<Tile*>;	
 
 	// Starting Tiles
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(0, 0), 1));
+	tiles->push_back(new Tile(player->GetPosition() + sf::Vector2i(0, 0), 1));
 	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(0, -32), 1));
 	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(0, 32), 1));
 	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(-32, 0), 1));
 	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(32, 0), 1));
 
-	tiles->at(0)->Hide();
 	std::cout << tiles->size() << " tiles." << std::endl;
 }
 

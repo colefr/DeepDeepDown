@@ -1,7 +1,8 @@
 #include "Player.hpp"
 
 Player::Player() :
-	position(sf::Vector2i(320,240))
+	position(sf::Vector2i(320,240)),
+	animationOffset(sf::Vector2f(0.0f, 0.0f))
 {
 	animation = new Animation(imgPath, sf::Vector2u(2,1));
 	animation->SetFrameRate(4);
@@ -19,7 +20,8 @@ void Player::Update(double& deltaTime) {
 
 	// This bit here just adds a little "bobbing" animation
 	bobTime += (2 * (float)deltaTime);
-	animation->GetSprite()->move(sf::Vector2f(0.0f, 0.05f * -sinf(bobTime)));
+	animationOffset = sf::Vector2f(0.0f, 0.05f * -sinf(bobTime));
+	animation->GetSprite()->move(animationOffset);
 }
 
 void Player::Draw(sf::RenderWindow* window) {
@@ -27,7 +29,8 @@ void Player::Draw(sf::RenderWindow* window) {
 }
 
 sf::Vector2i Player::GetPosition() {
-	return sf::Vector2i(animation->GetSprite()->getPosition());
+	// This returns the position of the sprite with any offsets caused by animations removed
+	return sf::Vector2i(animation->GetSprite()->getPosition() - animationOffset);
 }
 
 void Player::Move(sf::Vector2f aDistance) {

@@ -19,6 +19,7 @@ public:
 private:
 	Animation* animation;
 	float bobTime = 0;
+	sf::Vector2f animationOffset;
 	const std::string imgPath = "assets/img/player.png";
 	sf::Vector2i position;
 };
