@@ -153,7 +153,8 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Program.cpp" />
-    <ClCompile Include="src\Tile.cpp" />
+    <ClCompile Include="src\Tiles\AnimatedTile.cpp" />
+    <ClCompile Include="src\Tiles\Tile.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,7 +162,8 @@
     <ClInclude Include="src\Cursor.hpp" />
     <ClInclude Include="src\Player.hpp" />
     <ClInclude Include="src\Program.hpp" />
-    <ClInclude Include="src\Tile.hpp" />
+    <ClInclude Include="src\Tiles\AnimatedTile.hpp" />
+    <ClInclude Include="src\Tiles\Tile.hpp" />
     <ClInclude Include="src\World.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

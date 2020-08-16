@@ -1,15 +1,24 @@
 #include "Tile.hpp"
 
-Tile::Tile(sf::Texture* texturePtr, sf::IntRect aTextureRect, sf::Vector2i aPosition, unsigned short aTileID) :
-	isVisible(true)
+Tile::Tile(sf::Vector2i aPosition, unsigned short aTileID) :
+	sprite(nullptr),
+	isVisible(false),
+	position(aPosition),
+	tileID(aTileID)
 {
-	tileID = aTileID;
-	position = aPosition;
+}
 
+Tile::Tile(sf::Texture* texturePtr, sf::IntRect aTextureRect, sf::Vector2i aPosition, unsigned short aTileID) :
+	sprite(nullptr),
+	isVisible(true),
+	position(aPosition),
+	tileID(aTileID)
+{
 	sprite = new sf::Sprite();
 	sprite->setTexture(*texturePtr);
 	sprite->setTextureRect(aTextureRect);
-	sprite->setPosition((sf::Vector2f)aPosition);
+
+	sprite->setPosition((sf::Vector2f)position);
 	sprite->setOrigin(sf::Vector2f(16, 16));
 }
 
@@ -32,6 +41,14 @@ sf::Vector2i Tile::GetPosition() {
 
 Tile* Tile::GetTile() {
 	return this;
+}
+
+sf::Sprite* Tile::GetSprite() {
+	return sprite;
+}
+
+bool Tile::GetVisibility() {
+	return isVisible;
 }
 
 void Tile::Show() {

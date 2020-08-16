@@ -12,11 +12,11 @@ World::World() {
 	tiles = new std::vector<Tile*>;	
 
 	// Starting Tiles
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, sf::Vector2i((int)player->GetPosition().x, (int)player->GetPosition().y), 0));
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, sf::Vector2i((int)player->GetPosition().x + 32, (int)player->GetPosition().y), 1));
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, sf::Vector2i((int)player->GetPosition().x, (int)player->GetPosition().y + 32), 1));
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, sf::Vector2i((int)player->GetPosition().x - 32, (int)player->GetPosition().y), 1));
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, sf::Vector2i((int)player->GetPosition().x, (int)player->GetPosition().y - 32), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(0, 0), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(0, -32), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(0, 32), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(-32, 0), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(32, 0), 1));
 
 	tiles->at(0)->Hide();
 	std::cout << tiles->size() << " tiles." << std::endl;
@@ -36,8 +36,10 @@ World::~World() {
 
 void World::Update(double& deltaTime, sf::Window* window) {
 	player->Update(deltaTime);
-
 	cursor->Update(deltaTime, window);
+	for (int i = 0; i < tiles->size(); i++) {
+		tiles->at(i)->Update(deltaTime);
+	}
 
 	// Left click "breaks" a tile
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -50,7 +52,7 @@ void World::Update(double& deltaTime, sf::Window* window) {
 
 			// Check Up
 			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2i(0, -32)) == nullptr) {
-				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2i(0,-32), 1));
+				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2i(0, -32), 1));
 			}
 
 			// Check Down
@@ -82,21 +84,63 @@ void World::Update(double& deltaTime, sf::Window* window) {
 			tileToUpdate->Show();
 		}
 	}
-}
 
-void World::Draw(sf::RenderWindow* window) {
-	player->Draw(window);
-	cursor->Draw(window);
+	// Player Movement
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2i(0, -16));
+		if (checkTilePtr != nullptr) {
+			if (checkTilePtr->GetVisibility() == false) {
+				MovePlayer(sf::Vector2i(0, -320), deltaTime);
+			}
+		}
+	}
 
-	for (unsigned int i = 0; i < tiles->size(); i++) {
-		tiles->at(i)->Draw(window);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2i(-16, 0));
+		if (checkTilePtr != nullptr) {
+			if (checkTilePtr->GetVisibility() == false) {
+				MovePlayer(sf::Vector2i(-320, 0), deltaTime);
+			}
+		}		
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2i(0, 16));
+		if (checkTilePtr != nullptr) {
+			if (checkTilePtr->GetVisibility() == false) {
+				MovePlayer(sf::Vector2i(0, 320), deltaTime);
+			}
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2i(16, 0));
+		if (checkTilePtr != nullptr) {
+			if (checkTilePtr->GetVisibility() == false) {
+				MovePlayer(sf::Vector2i(320, 0), deltaTime);
+			}
+		}
 	}
 }
 
-Tile* World::CheckTiles(sf::Vector2i mousePos)
+void World::Draw(sf::RenderWindow* window) {
+	for (unsigned int i = 0; i < tiles->size(); i++) {
+		tiles->at(i)->Draw(window);
+	}
+
+	player->Draw(window);
+	cursor->Draw(window);
+}
+
+void World::MovePlayer(sf::Vector2i aDistance, double& deltaTime) {
+	sf::Vector2i distance = sf::Vector2i(aDistance.x * deltaTime, aDistance.y * deltaTime);
+	player->Move(distance);
+}
+
+Tile* World::CheckTiles(sf::Vector2i aPosition)
 {
 	for (unsigned int i = 0; i < tiles->size(); i++) {
-		if (abs(tiles->at(i)->GetPosition().x - mousePos.x) <= 16 && abs(tiles->at(i)->GetPosition().y - mousePos.y) <= 16) {
+		if (abs(tiles->at(i)->GetPosition().x - aPosition.x) <= 16 && abs(tiles->at(i)->GetPosition().y - aPosition.y) <= 16) {
 			//std::cout << abs(tiles->at(i)->GetPosition().x - mousePos.x) << " " << abs(tiles->at(i)->GetPosition().y - mousePos.y) << std::endl;
 			//std::cout << "Clicked a Tile!" << std::endl;
 			return tiles->at(i)->GetTile();

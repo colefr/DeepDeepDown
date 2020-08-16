@@ -1,6 +1,5 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "GlobalConstants.hpp"
 #include "Animation.hpp"
 #include <string>
 #include <iostream>
@@ -13,10 +12,13 @@ public:
 	void Update(double& deltaTime);
 	void Draw(sf::RenderWindow* window);
 
-	sf::Vector2f GetPosition();
+	sf::Vector2i GetPosition();
+
+	void Move(sf::Vector2i aDistance);
 
 private:
 	Animation* animation;
 	float bobTime = 0;
 	const std::string imgPath = "assets/img/player.png";
+	sf::Vector2i position;
 };

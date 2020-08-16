@@ -1,8 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "Tile.hpp"
+#include "Tiles/Tile.hpp"
 #include "Player.hpp"
-#include "Tile.hpp"
 #include "Cursor.hpp"
 #include <vector>
 
@@ -13,6 +12,8 @@ public:
 
 	void Update(double& deltaTime, sf::Window* window);
 	void Draw(sf::RenderWindow* window);
+
+	void MovePlayer(sf::Vector2i aDistance, double& deltaTime);
 
 private:
 	Player* player;
