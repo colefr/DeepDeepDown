@@ -14,7 +14,7 @@ public:
 
 	sf::Vector2i GetPosition();
 
-	void Move(sf::Vector2i aDistance);
+	void Move(sf::Vector2f aDistance);
 
 private:
 	Animation* animation;

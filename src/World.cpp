@@ -37,7 +37,7 @@ World::~World() {
 void World::Update(double& deltaTime, sf::Window* window) {
 	player->Update(deltaTime);
 	cursor->Update(deltaTime, window);
-	for (int i = 0; i < tiles->size(); i++) {
+	for (unsigned int i = 0; i < tiles->size(); i++) {
 		tiles->at(i)->Update(deltaTime);
 	}
 
@@ -90,7 +90,7 @@ void World::Update(double& deltaTime, sf::Window* window) {
 		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2i(0, -16));
 		if (checkTilePtr != nullptr) {
 			if (checkTilePtr->GetVisibility() == false) {
-				MovePlayer(sf::Vector2i(0, -320), deltaTime);
+				MovePlayer(sf::Vector2f(0, -320), deltaTime);
 			}
 		}
 	}
@@ -99,7 +99,7 @@ void World::Update(double& deltaTime, sf::Window* window) {
 		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2i(-16, 0));
 		if (checkTilePtr != nullptr) {
 			if (checkTilePtr->GetVisibility() == false) {
-				MovePlayer(sf::Vector2i(-320, 0), deltaTime);
+				MovePlayer(sf::Vector2f(-320, 0), deltaTime);
 			}
 		}		
 	}
@@ -108,7 +108,7 @@ void World::Update(double& deltaTime, sf::Window* window) {
 		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2i(0, 16));
 		if (checkTilePtr != nullptr) {
 			if (checkTilePtr->GetVisibility() == false) {
-				MovePlayer(sf::Vector2i(0, 320), deltaTime);
+				MovePlayer(sf::Vector2f(0, 320), deltaTime);
 			}
 		}
 	}
@@ -117,7 +117,7 @@ void World::Update(double& deltaTime, sf::Window* window) {
 		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2i(16, 0));
 		if (checkTilePtr != nullptr) {
 			if (checkTilePtr->GetVisibility() == false) {
-				MovePlayer(sf::Vector2i(320, 0), deltaTime);
+				MovePlayer(sf::Vector2f(320, 0), deltaTime);
 			}
 		}
 	}
@@ -132,8 +132,8 @@ void World::Draw(sf::RenderWindow* window) {
 	cursor->Draw(window);
 }
 
-void World::MovePlayer(sf::Vector2i aDistance, double& deltaTime) {
-	sf::Vector2i distance = sf::Vector2i(aDistance.x * deltaTime, aDistance.y * deltaTime);
+void World::MovePlayer(sf::Vector2f aDistance, double& deltaTime) {
+	sf::Vector2f distance = sf::Vector2f(aDistance.x * (float)deltaTime, aDistance.y * (float)deltaTime);
 	player->Move(distance);
 }
 

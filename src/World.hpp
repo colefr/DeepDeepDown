@@ -13,7 +13,7 @@ public:
 	void Update(double& deltaTime, sf::Window* window);
 	void Draw(sf::RenderWindow* window);
 
-	void MovePlayer(sf::Vector2i aDistance, double& deltaTime);
+	void MovePlayer(sf::Vector2f aDistance, double& deltaTime);
 
 private:
 	Player* player;

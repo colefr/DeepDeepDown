@@ -30,6 +30,6 @@ sf::Vector2i Player::GetPosition() {
 	return sf::Vector2i(animation->GetSprite()->getPosition());
 }
 
-void Player::Move(sf::Vector2i aDistance) {
-	animation->GetSprite()->move((sf::Vector2f)aDistance);
+void Player::Move(sf::Vector2f aDistance) {
+	animation->GetSprite()->move(aDistance);
 }
