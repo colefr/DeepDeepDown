@@ -16,4 +16,5 @@ public:
 private:
 	sf::RenderWindow* window;
 	World* world;
+	sf::View* view;
 };

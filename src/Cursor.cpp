@@ -14,8 +14,8 @@ Cursor::~Cursor() {
 	delete cursorTexture;
 }
 
-void Cursor::Update(double& deltaTime, sf::Window* window) {
-	cursorPosition = sf::Mouse::getPosition(*window);
+void Cursor::Update(double& deltaTime, sf::RenderWindow* window) {
+	cursorPosition = sf::Vector2i(window->mapPixelToCoords(sf::Mouse::getPosition(*window)));
 	cursorSprite->setPosition(sf::Vector2f(cursorPosition));
 }
 

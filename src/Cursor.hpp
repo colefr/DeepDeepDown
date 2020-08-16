@@ -7,7 +7,7 @@ public:
 	Cursor();
 	~Cursor();
 
-	void Update(double& deltaTime, sf::Window* window);
+	void Update(double& deltaTime, sf::RenderWindow* window);
 	void Draw(sf::RenderWindow* window);
 
 	sf::Vector2i GetPosition();

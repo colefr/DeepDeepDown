@@ -12,12 +12,12 @@ World::World() {
 	tiles = new std::vector<Tile*>;	
 
 	// Starting Tiles
-	tiles->push_back(new Tile(player->GetPosition() + sf::Vector2i(0, 0), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(0, 0), 1));
 	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(0, -32), 1));
 	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(0, 32), 1));
 	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(-32, 0), 1));
 	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(32, 0), 1));
-
+	tiles->at(0)->Hide();
 	std::cout << tiles->size() << " tiles." << std::endl;
 }
 
@@ -33,9 +33,10 @@ World::~World() {
 	delete cursor;
 }
 
-void World::Update(double& deltaTime, sf::Window* window) {
+void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) {
 	player->Update(deltaTime);
-	cursor->Update(deltaTime, window);
+	cursor->Update(deltaTime, window);	
+
 	for (unsigned int i = 0; i < tiles->size(); i++) {
 		tiles->at(i)->Update(deltaTime);
 	}
@@ -73,7 +74,7 @@ void World::Update(double& deltaTime, sf::Window* window) {
 			// can be manipulated in the future
 			tileToUpdate->Hide();
 		}
-		//std::cout << "Click! at (" << cursor->GetPosition().x << ", " << cursor->GetPosition().y << ")" << std::endl;		
+		//std::cout << "Click! at (" << cursor->GetPosition().x << ", " << cursor->GetPosition().y << ")" << std::endl;	
 	}
 
 	// Right click "places" a tile
@@ -120,6 +121,9 @@ void World::Update(double& deltaTime, sf::Window* window) {
 			}
 		}
 	}
+
+	//std::cout << player->GetPosition().x << player->GetPosition().y << std::endl;
+	std::cout << view->getCenter().x << view->getCenter().y << std::endl;
 }
 
 void World::Draw(sf::RenderWindow* window) {
@@ -134,6 +138,10 @@ void World::Draw(sf::RenderWindow* window) {
 void World::MovePlayer(sf::Vector2f aDistance, double& deltaTime) {
 	sf::Vector2f distance = sf::Vector2f(aDistance.x * (float)deltaTime, aDistance.y * (float)deltaTime);
 	player->Move(distance);
+}
+
+Player* World::GetPlayer() {
+	return player;
 }
 
 Tile* World::CheckTiles(sf::Vector2i aPosition)

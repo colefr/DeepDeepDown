@@ -7,11 +7,14 @@ Program::Program() {
 	window->setMouseCursorVisible(false);
 
 	world = new World();
+
+	view = new sf::View(window->getView());
 }
 
 Program::~Program() {
 	delete window;
 	delete world;
+	delete view;
 }
 
 void Program::HandleEvents() {
@@ -31,11 +34,14 @@ void Program::HandleEvents() {
 void Program::Update(double &deltaTime) {
 	//std::cout << "deltaTime = " << (float)deltaTime << "s" << std::endl;
 	//std::cout << "FPS = " << (int)(1 / deltaTime) << std::endl;
-	world->Update(deltaTime, window);
+	world->Update(deltaTime, window, view);
+	sf::Vector2f playerPosition = sf::Vector2f(world->GetPlayer()->GetPosition());
+	view->setCenter(playerPosition);
 }
 
 void Program::Draw() {
 	window->clear();
+	window->setView(*view);
 	world->Draw(window);
 	window->display();
 }

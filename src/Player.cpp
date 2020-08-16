@@ -30,7 +30,8 @@ void Player::Draw(sf::RenderWindow* window) {
 
 sf::Vector2i Player::GetPosition() {
 	// This returns the position of the sprite with any offsets caused by animations removed
-	return sf::Vector2i(animation->GetSprite()->getPosition() - animationOffset);
+	sf::Vector2f spritePosition = animation->GetSprite()->getPosition();
+	return sf::Vector2i(spritePosition - animationOffset);
 }
 
 void Player::Move(sf::Vector2f aDistance) {

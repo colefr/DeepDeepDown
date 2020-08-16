@@ -10,10 +10,11 @@ public:
 	World();
 	~World();
 
-	void Update(double& deltaTime, sf::Window* window);
+	void Update(double& deltaTime, sf::RenderWindow* window, sf::View* view);
 	void Draw(sf::RenderWindow* window);
 
 	void MovePlayer(sf::Vector2f aDistance, double& deltaTime);
+	Player* GetPlayer();
 
 private:
 	Player* player;
