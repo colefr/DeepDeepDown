@@ -12,11 +12,11 @@ World::World() {
 	tiles = new std::vector<Tile*>;	
 
 	// Starting Tiles
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(0, 0), 1));
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(0, -32), 1));
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(0, 32), 1));
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(-32, 0), 1));
-	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2i(32, 0), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2f(0, 0), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2f(0, -32), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2f(0, 32), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2f(-32, 0), 1));
+	tiles->push_back(new Tile(tileTexture, stoneTileRect, player->GetPosition() + sf::Vector2f(32, 0), 1));
 	tiles->at(0)->Hide();
 	std::cout << tiles->size() << " tiles." << std::endl;
 }
@@ -51,23 +51,23 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 			// If not, then replace empty spaces with new stone tiles.
 
 			// Check Up
-			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2i(0, -32)) == nullptr) {
-				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2i(0, -32), 1));
+			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(0, -32)) == nullptr) {
+				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2f(0, -32), 1));
 			}
 
 			// Check Down
-			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2i(0, 32)) == nullptr) {
-				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2i(0, 32), 1));
+			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(0, 32)) == nullptr) {
+				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2f(0, 32), 1));
 			}
 
 			// Check Left
-			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2i(-32, 0)) == nullptr) {
-				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2i(-32, 0), 1));
+			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(-32, 0)) == nullptr) {
+				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2f(-32, 0), 1));
 			}
 
 			//Check Right
-			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2i(32, 0)) == nullptr) {
-				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2i(32, 0), 1));
+			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(32, 0)) == nullptr) {
+				tiles->push_back(new Tile(tileTexture, stoneTileRect, tileToUpdate->GetPosition() + sf::Vector2f(32, 0), 1));
 			}
 
 			// Hide the tile, but keep it there, both for the null-tile check, and also so it
@@ -87,7 +87,7 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 
 	// Player Movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2i(0, -16));
+		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2f(0, -16));
 		if (checkTilePtr != nullptr) {
 			if (checkTilePtr->GetVisibility() == false) {
 				MovePlayer(sf::Vector2f(0, -320), deltaTime);
@@ -96,7 +96,7 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2i(-16, 0));
+		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2f(-16, 0));
 		if (checkTilePtr != nullptr) {
 			if (checkTilePtr->GetVisibility() == false) {
 				MovePlayer(sf::Vector2f(-320, 0), deltaTime);
@@ -105,7 +105,7 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2i(0, 16));
+		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2f(0, 16));
 		if (checkTilePtr != nullptr) {
 			if (checkTilePtr->GetVisibility() == false) {
 				MovePlayer(sf::Vector2f(0, 320), deltaTime);
@@ -114,7 +114,7 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2i(16, 0));
+		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2f(16, 0));
 		if (checkTilePtr != nullptr) {
 			if (checkTilePtr->GetVisibility() == false) {
 				MovePlayer(sf::Vector2f(320, 0), deltaTime);
@@ -123,7 +123,7 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 	}
 
 	//std::cout << player->GetPosition().x << player->GetPosition().y << std::endl;
-	std::cout << view->getCenter().x << view->getCenter().y << std::endl;
+	//std::cout << view->getCenter().x << view->getCenter().y << std::endl;
 }
 
 void World::Draw(sf::RenderWindow* window) {
@@ -144,7 +144,7 @@ Player* World::GetPlayer() {
 	return player;
 }
 
-Tile* World::CheckTiles(sf::Vector2i aPosition)
+Tile* World::CheckTiles(sf::Vector2f aPosition)
 {
 	for (unsigned int i = 0; i < tiles->size(); i++) {
 		if (abs(tiles->at(i)->GetPosition().x - aPosition.x) <= 16 && abs(tiles->at(i)->GetPosition().y - aPosition.y) <= 16) {

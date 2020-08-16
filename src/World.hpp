@@ -20,7 +20,7 @@ private:
 	Player* player;
 	std::vector<Tile*>* tiles;
 	Cursor* cursor;
-	Tile* CheckTiles(sf::Vector2i mousePos);
+	Tile* CheckTiles(sf::Vector2f mousePos);
 
 	sf::Texture* tileTexture;
 	sf::IntRect stoneTileRect = sf::IntRect(0, 0, 32, 32);

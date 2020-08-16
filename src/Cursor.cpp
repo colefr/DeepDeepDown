@@ -15,7 +15,7 @@ Cursor::~Cursor() {
 }
 
 void Cursor::Update(double& deltaTime, sf::RenderWindow* window) {
-	cursorPosition = sf::Vector2i(window->mapPixelToCoords(sf::Mouse::getPosition(*window)));
+	cursorPosition = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
 	cursorSprite->setPosition(sf::Vector2f(cursorPosition));
 }
 
@@ -23,6 +23,6 @@ void Cursor::Draw(sf::RenderWindow* window) {
 	window->draw(*cursorSprite);
 }
 
-sf::Vector2i Cursor::GetPosition() {
+sf::Vector2f Cursor::GetPosition() {
 	return cursorPosition;
 }

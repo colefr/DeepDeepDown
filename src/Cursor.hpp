@@ -10,12 +10,12 @@ public:
 	void Update(double& deltaTime, sf::RenderWindow* window);
 	void Draw(sf::RenderWindow* window);
 
-	sf::Vector2i GetPosition();
+	sf::Vector2f GetPosition();
 
 private:
 	sf::Sprite* cursorSprite;
 	sf::Texture* cursorTexture;
-	sf::Vector2i cursorPosition;
+	sf::Vector2f cursorPosition;
 
 	std::string imgPath = "assets/img/cursor_arrow.png";
 };

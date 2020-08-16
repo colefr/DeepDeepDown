@@ -6,14 +6,14 @@
 
 class Tile {
 public:
-	Tile(sf::Vector2i aPosition, unsigned short aTileID);
-	Tile(sf::Texture* texturePtr, sf::IntRect aTextureRect, sf::Vector2i aPosition, unsigned short aTileID);
+	Tile(sf::Vector2f aPosition, unsigned short aTileID);
+	Tile(sf::Texture* texturePtr, sf::IntRect aTextureRect, sf::Vector2f aPosition, unsigned short aTileID);
 	virtual ~Tile();
 
 	void Update(double& deltaTime);
 	void Draw(sf::RenderWindow* window);
 
-	sf::Vector2i GetPosition();
+	sf::Vector2f GetPosition();
 	Tile* GetTile();
 	sf::Sprite* GetSprite();
 	bool GetVisibility();
@@ -23,7 +23,7 @@ public:
 
 private:
 	unsigned short tileID;
-	sf::Vector2i position;
+	sf::Vector2f position;
 	sf::Sprite* sprite;
 	bool isVisible;
 };

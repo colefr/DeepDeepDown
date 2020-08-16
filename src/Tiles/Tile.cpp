@@ -1,6 +1,6 @@
 #include "Tile.hpp"
 
-Tile::Tile(sf::Vector2i aPosition, unsigned short aTileID) :
+Tile::Tile(sf::Vector2f aPosition, unsigned short aTileID) :
 	sprite(nullptr),
 	isVisible(false),
 	position(aPosition),
@@ -8,7 +8,7 @@ Tile::Tile(sf::Vector2i aPosition, unsigned short aTileID) :
 {
 }
 
-Tile::Tile(sf::Texture* texturePtr, sf::IntRect aTextureRect, sf::Vector2i aPosition, unsigned short aTileID) :
+Tile::Tile(sf::Texture* texturePtr, sf::IntRect aTextureRect, sf::Vector2f aPosition, unsigned short aTileID) :
 	sprite(nullptr),
 	isVisible(true),
 	position(aPosition),
@@ -35,7 +35,7 @@ void Tile::Draw(sf::RenderWindow* window) {
 	}
 }
 
-sf::Vector2i Tile::GetPosition() {
+sf::Vector2f Tile::GetPosition() {
 	return position;
 }
 
