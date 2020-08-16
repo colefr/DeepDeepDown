@@ -9,6 +9,7 @@ Program::Program() {
 	world = new World();
 
 	view = new sf::View(window->getView());
+	view->zoom(0.5f);
 }
 
 Program::~Program() {
