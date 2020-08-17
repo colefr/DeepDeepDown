@@ -1,6 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "Animation.hpp"
+#include "Animator.hpp"
 #include <string>
 #include <iostream>
 
@@ -17,8 +17,10 @@ public:
 	void Move(sf::Vector2f aDistance);
 
 private:
-	Animation* animation;
+	sf::Sprite* sprite;
+	sf::Texture* spriteTexture;
+	Animator* animator;
 	float bobTime = 0;
 
-	const std::string imgPath = "assets/img/player.png";
+	const std::string textureImgPath = "assets/img/player.png";
 };
