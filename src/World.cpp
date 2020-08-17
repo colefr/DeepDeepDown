@@ -5,18 +5,29 @@ World::World() {
 
 	player = new Player();
 	const std::string imgPath = "assets/img/stone.png";
+	const std::string animImgPath = "assets/img/shiny_rock.png";
 
 	tileTexture = new sf::Texture();
 	tileTexture->loadFromFile(imgPath);
+
+	animTexture = new sf::Texture();
+	animTexture->loadFromFile(animImgPath);
 
 	tiles = new std::vector<Tile*>;	
 
 	// Starting Tiles
 	tiles->push_back(new StaticTile(player->GetPosition(), tileTexture));
+
 	tiles->push_back(new StaticTile(player->GetPosition() + sf::Vector2f(0, -32), tileTexture));
 	tiles->push_back(new StaticTile(player->GetPosition() + sf::Vector2f(0, 32), tileTexture));
 	tiles->push_back(new StaticTile(player->GetPosition() + sf::Vector2f(-32, 0), tileTexture));
 	tiles->push_back(new StaticTile(player->GetPosition() + sf::Vector2f(32, 0), tileTexture));
+
+	tiles->push_back(new AnimatedTile(player->GetPosition() + sf::Vector2f(-32, -32), animTexture, 1));
+	tiles->push_back(new AnimatedTile(player->GetPosition() + sf::Vector2f(32, -32), animTexture, 2));
+	tiles->push_back(new AnimatedTile(player->GetPosition() + sf::Vector2f(-32, 32), animTexture, 3));
+	tiles->push_back(new AnimatedTile(player->GetPosition() + sf::Vector2f(32, 32), animTexture, 4));
+
 	tiles->at(0)->Hide();
 	std::cout << tiles->size() << " tiles." << std::endl;
 }
@@ -30,6 +41,7 @@ World::~World() {
 
 	delete tiles;
 	delete tileTexture;
+	delete animTexture;
 	delete cursor;
 }
 

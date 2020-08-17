@@ -1,15 +1,15 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "Tile.hpp"
+#include "StaticTile.hpp"
+#include "../Animator.hpp"
 
-class AnimatedTile {
+class AnimatedTile : public StaticTile {
 public:
-	AnimatedTile(sf::Texture* texturePtr, sf::IntRect aTextureRect, sf::Vector2i aPosition, unsigned short aTileID);
-	~AnimatedTile();
+	AnimatedTile(sf::Vector2f aPosition, sf::Texture* aTexture, float aFrameRate);
+	~AnimatedTile() override;
 
-	void Update(double& deltaTime, sf::Window* window);
-	void Draw(sf::RenderWindow* window);
+	void Update(double& deltaTime) override;
 
 private:
-	Tile* tile;
+	Animator* animator;
 };

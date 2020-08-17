@@ -25,6 +25,7 @@ public:
 private:
 	sf::Sprite* sprite;
 	Timer* timer;
+	sf::IntRect textureRect;
 	float frameRate;
 	int frameIndex;
 	int frameCount;

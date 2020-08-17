@@ -1,16 +1,17 @@
 #include "AnimatedTile.hpp"
 
-AnimatedTile::AnimatedTile(sf::Texture* texturePtr, sf::IntRect aTextureRect, sf::Vector2i aPosition, unsigned short aTileID) {
-	//tile = new Tile(texturePtr, aTextureRect, aPosition, aTileID);
+AnimatedTile::AnimatedTile(sf::Vector2f aPosition, sf::Texture* aTexture, float aFrameRate) :
+	StaticTile(aPosition, aTexture),
+	animator(nullptr)
+{
+	animator = new Animator(sprite, aFrameRate);
 }
 
 AnimatedTile::~AnimatedTile() {
-	delete tile;
+	delete animator;
+	delete sprite;
 }
 
-void AnimatedTile::Update(double& deltaTime, sf::Window* window) {
-}
-
-void AnimatedTile::Draw(sf::RenderWindow* window) {
-	tile->Draw(window);
+void AnimatedTile::Update(double& deltaTime) {
+	animator->Update(deltaTime);
 }

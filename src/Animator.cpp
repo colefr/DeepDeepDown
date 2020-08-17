@@ -13,7 +13,10 @@ Animator::Animator(sf::Sprite* aTargetSprite, float aFrameRate, int aFrameIndex,
 	frameCount = sprite->getTexture()->getSize().x / 32;	// SOON!!! Replace all 32's and 16's
 															// with a global const TILE_SIZE !!!
 
-	sf::IntRect textureRect = sf::IntRect(sf::Vector2i((int)aFrameIndex * 32, 0), sf::Vector2i((int)aFrameIndex * 32 + 32, 32));
+	//sf::IntRect textureRect = sf::IntRect(sf::Vector2i((int)aFrameIndex * 32, 0), sf::Vector2i((int)aFrameIndex * 32 + 32, 32));
+	textureRect.width = 32;
+	textureRect.height = 32;
+	textureRect.left = aFrameIndex * 32;
 	sprite->setTextureRect(textureRect);
 }
 
@@ -35,7 +38,8 @@ void Animator::Update(double& deltaTime) {
 
 		else frameIndex = 0;
 
-		sf::IntRect textureRect = sf::IntRect(sf::Vector2i((int)frameIndex * 32, 0), sf::Vector2i((int)frameIndex * 32 + 32, 32));
+		//sf::IntRect textureRect = sf::IntRect(sf::Vector2i((int)frameIndex * 32, 0), sf::Vector2i((int)(frameIndex * 32) + 32, 32));
+		textureRect.left = frameIndex * 32;
 		sprite->setTextureRect(textureRect);
 
 		timer->Restart();

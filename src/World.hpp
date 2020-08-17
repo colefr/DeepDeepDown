@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Tiles/StaticTile.hpp"
+#include "Tiles/AnimatedTile.hpp"
 #include "Player.hpp"
 #include "Cursor.hpp"
 #include <vector>
@@ -23,5 +24,5 @@ private:
 	Tile* CheckTiles(sf::Vector2f mousePos);
 
 	sf::Texture* tileTexture;
-	sf::IntRect stoneTileRect = sf::IntRect(0, 0, 32, 32);
+	sf::Texture* animTexture;
 };
