@@ -18,7 +18,7 @@ World::World() {
 	chunks->push_back(new Chunk(player->position));
 
 	// Starting Tiles
-	for (int i = 0; i < 255; i++) {
+	for (int i = 0; i < 256; i++) {
 		chunks->at(0)->SetTileType(i, Tile::TileType::Stone);
 	}
 

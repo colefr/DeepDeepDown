@@ -16,7 +16,7 @@ Chunk::Chunk(sf::Vector2f aMidPoint) :
 		for (int j = 0; j < chunkSizeInTiles; j++) {
 			sf::Vector2f tilePosition;
 			tilePosition.x = i * tileSize + (aMidPoint.x - (chunkSizeInPixels * 0.5f));
-			tilePosition.y = i * tileSize + (aMidPoint.y - (chunkSizeInPixels * 0.5f));
+			tilePosition.y = j * tileSize + (aMidPoint.y - (chunkSizeInPixels * 0.5f));
 
 			tiles->push_back(new Tile::Empty(tilePosition));
 		}
