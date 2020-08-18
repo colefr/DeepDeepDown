@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="src\Animator.cpp" />
     <ClCompile Include="src\Cursor.cpp" />
+    <ClCompile Include="src\Entity\Entity.cpp" />
     <ClCompile Include="src\Entity\Player.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Program.cpp" />

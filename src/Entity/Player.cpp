@@ -40,10 +40,6 @@ void Player::Update(double& deltaTime) {
 	sprite->setScale(spriteScale + scaleOffset);
 }
 
-void Player::Draw(sf::RenderWindow* window) {
-	window->draw(*sprite);
-}
-
 void Player::Move(sf::Vector2f aDistance) {
 	sprite->move(aDistance);
 	hitBox.left += aDistance.x;

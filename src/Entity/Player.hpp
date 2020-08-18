@@ -11,8 +11,6 @@ public:
 	~Player();
 
 	void Update(double& deltaTime);
-	void Draw(sf::RenderWindow* window);
-
 	void Move(sf::Vector2f aDistance);
 
 private:

@@ -3,6 +3,8 @@
 
 class Entity {
 public:
+	virtual void Draw(sf::RenderWindow* window);
+
 	sf::Sprite* sprite;
 	sf::Texture* texture;
 
