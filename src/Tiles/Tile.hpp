@@ -8,8 +8,6 @@ class Tile {
 public:
 	sf::Vector2f GetPosition();
 	bool GetVisibility();
-	
-	bool IsUnderMouseCursor(sf::Vector2f mousePos);
 
 	void Show();
 	void Hide();
@@ -20,6 +18,7 @@ public:
 	Tile* GetTilePointer();
 
 	sf::Sprite* sprite;
+	sf::FloatRect* tileRect;
 	sf::Vector2f position;
 	bool isVisible = true;
 };

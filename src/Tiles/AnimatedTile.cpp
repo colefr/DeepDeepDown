@@ -10,6 +10,7 @@ AnimatedTile::AnimatedTile(sf::Vector2f aPosition, sf::Texture* aTexture, float 
 AnimatedTile::~AnimatedTile() {
 	delete animator;
 	delete sprite;
+	delete tileRect;
 }
 
 void AnimatedTile::Update(double& deltaTime) {

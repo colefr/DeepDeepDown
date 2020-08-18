@@ -9,7 +9,7 @@ Program::Program() {
 	world = new World();
 
 	view = new sf::View(window->getView());
-	view->zoom(0.5f);
+	view->zoom(0.75f);
 }
 
 Program::~Program() {
@@ -36,7 +36,7 @@ void Program::Update(double &deltaTime) {
 	//std::cout << "deltaTime = " << (float)deltaTime << "s" << std::endl;
 	//std::cout << "FPS = " << (int)(1 / deltaTime) << std::endl;
 	world->Update(deltaTime, window, view);
-	sf::Vector2f playerPosition = sf::Vector2f(world->GetPlayer()->GetPosition());
+	sf::Vector2f playerPosition = world->GetPlayer()->GetPosition() + sf::Vector2f(16, 16);
 	view->setCenter(playerPosition);
 }
 

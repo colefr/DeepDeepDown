@@ -86,7 +86,6 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 			// can be manipulated in the future
 			tileToUpdate->Hide();
 		}
-		//std::cout << "Click! at (" << cursor->GetPosition().x << ", " << cursor->GetPosition().y << ")" << std::endl;	
 	}
 
 	// Right click "places" a tile
@@ -97,45 +96,35 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 		}
 	}
 
-	// Player Movement
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2f(0, -16));
-		if (checkTilePtr != nullptr) {
-			if (checkTilePtr->GetVisibility() == false) {
-				MovePlayer(sf::Vector2f(0, -320), deltaTime);
-			}
-		}
-	}
-
+	// Horizontal (X-axis) Movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2f(-16, 0));
-		if (checkTilePtr != nullptr) {
-			if (checkTilePtr->GetVisibility() == false) {
-				MovePlayer(sf::Vector2f(-320, 0), deltaTime);
-			}
-		}		
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2f(0, 16));
-		if (checkTilePtr != nullptr) {
-			if (checkTilePtr->GetVisibility() == false) {
-				MovePlayer(sf::Vector2f(0, 320), deltaTime);
-			}
+		MovePlayer(sf::Vector2f(-320, 0), deltaTime);
+		if (CheckTileCollision(player->GetSpriteRect())) {
+			MovePlayer(sf::Vector2f(320, 0), deltaTime);
 		}
 	}
-
+	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		Tile* checkTilePtr = CheckTiles(player->GetPosition() + sf::Vector2f(16, 0));
-		if (checkTilePtr != nullptr) {
-			if (checkTilePtr->GetVisibility() == false) {
-				MovePlayer(sf::Vector2f(320, 0), deltaTime);
-			}
+		MovePlayer(sf::Vector2f(320, 0), deltaTime);
+		if (CheckTileCollision(player->GetSpriteRect())) {
+			MovePlayer(sf::Vector2f(-320, 0), deltaTime);
 		}
 	}
 
-	//std::cout << player->GetPosition().x << player->GetPosition().y << std::endl;
-	//std::cout << view->getCenter().x << view->getCenter().y << std::endl;
+	// Vertical (Y-axis) Movement
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+		MovePlayer(sf::Vector2f(0, 320), deltaTime);
+		if (CheckTileCollision(player->GetSpriteRect())) {
+			MovePlayer(sf::Vector2f(0, -320), deltaTime);
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		MovePlayer(sf::Vector2f(0, -320), deltaTime);
+		if (CheckTileCollision(player->GetSpriteRect())) {
+			MovePlayer(sf::Vector2f(0, 320), deltaTime);
+		}
+	}	
 }
 
 void World::Draw(sf::RenderWindow* window) {
@@ -156,18 +145,24 @@ Player* World::GetPlayer() {
 	return player;
 }
 
-Tile* World::CheckTiles(sf::Vector2f aPosition)
-{
+Tile* World::CheckTiles(sf::Vector2f aPosition) {
 	for (unsigned int i = 0; i < tiles->size(); i++) {
-		if (abs(tiles->at(i)->GetPosition().x - aPosition.x) <= 16 && abs(tiles->at(i)->GetPosition().y - aPosition.y) <= 16) {
-			//std::cout << abs(tiles->at(i)->GetPosition().x - mousePos.x) << " " << abs(tiles->at(i)->GetPosition().y - mousePos.y) << std::endl;
-			//std::cout << "Clicked a Tile!" << std::endl;
+		if (tiles->at(i)->tileRect->contains(aPosition)) {
 			return tiles->at(i)->GetTilePointer();
 		}
+	}
 
-		else continue;
-	}		
-		
-	//std::cout << "..." << std::endl;
 	return nullptr;
+}
+
+bool World::CheckTileCollision(sf::FloatRect* aRect) {
+	for (unsigned int i = 0; i < tiles->size(); i++) {
+		if (tiles->at(i)->tileRect->intersects(*aRect)) {
+			if (tiles->at(i)->GetVisibility() == true) {
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
