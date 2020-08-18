@@ -54,6 +54,9 @@
     <ClCompile Include="src\Entity\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Program.hpp">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="src\Tile\Tile.hpp">
       <Filter>Source Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Chunk.hpp">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

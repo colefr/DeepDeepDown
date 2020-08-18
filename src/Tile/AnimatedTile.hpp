@@ -3,13 +3,15 @@
 #include "StaticTile.hpp"
 #include "../Animator.hpp"
 
-class AnimatedTile : public StaticTile {
-public:
-	AnimatedTile(sf::Vector2f aPosition, sf::Texture* aTexture, float aFrameRate);
-	~AnimatedTile() override;
+namespace Tile {
+	class AnimatedTile : public StaticTile {
+	public:
+		AnimatedTile(sf::Vector2f aPosition, sf::Texture* aTexture, float aFrameRate);
+		~AnimatedTile() override;
 
-	void Update(double& deltaTime) override;
+		void Update(double& deltaTime) override;
 
-private:
-	Animator* animator;
-};
+	private:
+		Animator* animator;
+	};
+}

@@ -19,9 +19,9 @@ public:
 
 private:
 	Player* player;
-	std::vector<Tile*>* tiles;
+	std::vector<Tile::Tile*>* tiles;
 	Cursor* cursor;
-	Tile* CheckTiles(sf::Vector2f mousePos);
+	Tile::Tile* CheckTiles(sf::Vector2f mousePos);
 	bool CheckTileCollision(sf::FloatRect& aRect);
 
 	sf::Texture* tileTexture;

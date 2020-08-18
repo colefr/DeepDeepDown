@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Animator.cpp" />
+    <ClCompile Include="src\Chunk.cpp" />
     <ClCompile Include="src\Cursor.cpp" />
     <ClCompile Include="src\Entity\Entity.cpp" />
     <ClCompile Include="src\Entity\Player.cpp" />
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Animator.hpp" />
+    <ClInclude Include="src\Chunk.hpp" />
     <ClInclude Include="src\Cursor.hpp" />
     <ClInclude Include="src\Entity\Entity.hpp" />
     <ClInclude Include="src\Entity\Player.hpp" />

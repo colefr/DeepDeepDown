@@ -13,20 +13,20 @@ World::World() {
 	animTexture = new sf::Texture();
 	animTexture->loadFromFile(animImgPath);
 
-	tiles = new std::vector<Tile*>;	
+	tiles = new std::vector<Tile::Tile*>;	
 
 	// Starting Tiles
-	tiles->push_back(new StaticTile(player->position, tileTexture));
+	tiles->push_back(new Tile::StaticTile(player->position, tileTexture));
 
-	tiles->push_back(new StaticTile(player->position + sf::Vector2f(0, -32), tileTexture));
-	tiles->push_back(new StaticTile(player->position + sf::Vector2f(0, 32), tileTexture));
-	tiles->push_back(new StaticTile(player->position + sf::Vector2f(-32, 0), tileTexture));
-	tiles->push_back(new StaticTile(player->position + sf::Vector2f(32, 0), tileTexture));
+	tiles->push_back(new Tile::StaticTile(player->position + sf::Vector2f(0, -32), tileTexture));
+	tiles->push_back(new Tile::StaticTile(player->position + sf::Vector2f(0, 32), tileTexture));
+	tiles->push_back(new Tile::StaticTile(player->position + sf::Vector2f(-32, 0), tileTexture));
+	tiles->push_back(new Tile::StaticTile(player->position + sf::Vector2f(32, 0), tileTexture));
 
-	tiles->push_back(new AnimatedTile(player->position + sf::Vector2f(-32, -32), animTexture, 1));
-	tiles->push_back(new AnimatedTile(player->position + sf::Vector2f(32, -32), animTexture, 2));
-	tiles->push_back(new AnimatedTile(player->position + sf::Vector2f(-32, 32), animTexture, 3));
-	tiles->push_back(new AnimatedTile(player->position + sf::Vector2f(32, 32), animTexture, 4));
+	tiles->push_back(new Tile::AnimatedTile(player->position + sf::Vector2f(-32, -32), animTexture, 1));
+	tiles->push_back(new Tile::AnimatedTile(player->position + sf::Vector2f(32, -32), animTexture, 2));
+	tiles->push_back(new Tile::AnimatedTile(player->position + sf::Vector2f(-32, 32), animTexture, 3));
+	tiles->push_back(new Tile::AnimatedTile(player->position + sf::Vector2f(32, 32), animTexture, 4));
 
 	tiles->at(0)->Hide();
 	std::cout << tiles->size() << " tiles." << std::endl;
@@ -55,7 +55,7 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 
 	// Left click "breaks" a tile
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-		Tile* tileToUpdate = CheckTiles(cursor->GetPosition());
+		Tile::Tile* tileToUpdate = CheckTiles(cursor->GetPosition());
 		if (tileToUpdate != nullptr) {
 			//std::cout << "Clicked a Tile!" << std::endl;
 
@@ -64,22 +64,22 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 
 			// Check Up
 			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(0, -32)) == nullptr) {
-				tiles->push_back(new StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(0, -32), tileTexture));
+				tiles->push_back(new Tile::StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(0, -32), tileTexture));
 			}
 
 			// Check Down
 			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(0, 32)) == nullptr) {
-				tiles->push_back(new StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(0, 32), tileTexture));
+				tiles->push_back(new Tile::StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(0, 32), tileTexture));
 			}
 
 			// Check Left
 			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(-32, 0)) == nullptr) {
-				tiles->push_back(new StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(-32, 0), tileTexture));
+				tiles->push_back(new Tile::StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(-32, 0), tileTexture));
 			}
 
 			//Check Right
 			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(32, 0)) == nullptr) {
-				tiles->push_back(new StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(32, 0), tileTexture));
+				tiles->push_back(new Tile::StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(32, 0), tileTexture));
 			}
 
 			// Hide the tile, but keep it there, both for the null-tile check, and also so it
@@ -90,7 +90,7 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 
 	// Right click "places" a tile
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-		Tile* tileToUpdate = CheckTiles(cursor->GetPosition());
+		Tile::Tile* tileToUpdate = CheckTiles(cursor->GetPosition());
 		if (tileToUpdate != nullptr) {
 			tileToUpdate->Show();
 		}
@@ -145,9 +145,9 @@ Player* World::GetPlayer() {
 	return player;
 }
 
-Tile* World::CheckTiles(sf::Vector2f aPosition) {
+Tile::Tile* World::CheckTiles(sf::Vector2f aPosition) {
 	for (unsigned int i = 0; i < tiles->size(); i++) {
-		if (tiles->at(i)->tileRect->contains(aPosition)) {
+		if (tiles->at(i)->hitBox.contains(aPosition)) {
 			return tiles->at(i)->GetTilePointer();
 		}
 	}
@@ -157,7 +157,7 @@ Tile* World::CheckTiles(sf::Vector2f aPosition) {
 
 bool World::CheckTileCollision(sf::FloatRect& aRect) {
 	for (unsigned int i = 0; i < tiles->size(); i++) {
-		if (tiles->at(i)->tileRect->intersects(aRect)) {
+		if (tiles->at(i)->hitBox.intersects(aRect)) {
 			if (tiles->at(i)->GetVisibility() == true) {
 				return true;
 			}

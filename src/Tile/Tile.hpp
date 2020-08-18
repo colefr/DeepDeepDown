@@ -4,21 +4,37 @@
 #include <iostream>
 #include "../Entity/Player.hpp"
 
-class Tile {
-public:
-	sf::Vector2f GetPosition();
-	bool GetVisibility();
+namespace Tile {
+	enum class TileType {
+		Empty = 0
+	};
 
-	void Show();
-	void Hide();
+	class Tile {
+	public:
+		sf::Vector2f GetPosition();
+		bool GetVisibility();
 
-	virtual void Draw(sf::RenderWindow* window);
-	virtual void Update(double& deltaTime);
+		void Show();
+		void Hide();
 
-	Tile* GetTilePointer();
+		virtual void Draw(sf::RenderWindow* window);
+		virtual void Update(double& deltaTime);
 
-	sf::Sprite* sprite;
-	sf::FloatRect* tileRect;
-	sf::Vector2f position;
-	bool isVisible = true;
-};
+		Tile* GetTilePointer();
+
+		sf::Sprite* sprite;
+		sf::FloatRect hitBox;
+		sf::Vector2f position;
+		bool isVisible = true;
+		TileType tileType;
+	};
+
+	class Empty : public Tile {
+	public:
+		Empty(sf::Vector2f& aPosition);
+		~Empty();
+
+		void Draw(sf::RenderWindow* window) override;
+		void Update(double& deltaTime) override;
+	};
+}
