@@ -5,10 +5,11 @@ StaticTile::StaticTile(sf::Vector2f aPosition, sf::Texture* aTexture)
 	position = aPosition;
 
 	sprite = new sf::Sprite();
+	sprite->setOrigin(sf::Vector2f(16, 16));
 	sprite->setPosition(aPosition);
 	sprite->setTexture(*aTexture);
 
-	tileRect = new sf::FloatRect(aPosition, sf::Vector2f(32, 32));
+	tileRect = new sf::FloatRect(aPosition - sf::Vector2f(16, 16), sf::Vector2f(32, 32));
 }
 
 StaticTile::~StaticTile() {

@@ -22,4 +22,5 @@ private:
 	sf::Texture* spriteTexture;
 	Animator* animator;
 	sf::FloatRect* spriteRect;
+	float bobTime;
 };

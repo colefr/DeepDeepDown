@@ -36,7 +36,7 @@ void Program::Update(double &deltaTime) {
 	//std::cout << "deltaTime = " << (float)deltaTime << "s" << std::endl;
 	//std::cout << "FPS = " << (int)(1 / deltaTime) << std::endl;
 	world->Update(deltaTime, window, view);
-	sf::Vector2f playerPosition = world->GetPlayer()->GetPosition() + sf::Vector2f(16, 16);
+	sf::Vector2f playerPosition = world->GetPlayer()->GetPosition();
 	view->setCenter(playerPosition);
 }
 
