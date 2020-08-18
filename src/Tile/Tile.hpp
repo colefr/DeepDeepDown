@@ -6,7 +6,9 @@
 
 namespace Tile {
 	enum class TileType {
-		Empty = 0
+		Empty = 0,
+		Floor,
+		Stone
 	};
 
 	class Tile {
@@ -22,11 +24,12 @@ namespace Tile {
 
 		Tile* GetTilePointer();
 
-		sf::Sprite* sprite;
+		sf::Sprite* sprite = nullptr;
+		sf::Texture* texture = nullptr;
 		sf::FloatRect hitBox;
 		sf::Vector2f position;
 		bool isVisible = true;
-		TileType tileType;
+		TileType tileType = TileType::Empty;
 	};
 
 	class Empty : public Tile {

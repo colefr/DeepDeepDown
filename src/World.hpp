@@ -4,6 +4,7 @@
 #include "Tile/AnimatedTile.hpp"
 #include "Entity/Player.hpp"
 #include "Cursor.hpp"
+#include "Chunk.hpp"
 #include <vector>
 
 class World {
@@ -19,7 +20,8 @@ public:
 
 private:
 	Player* player;
-	std::vector<Tile::Tile*>* tiles;
+	//std::vector<Tile::Tile*>* tiles;
+	std::vector<Chunk*>* chunks;
 	Cursor* cursor;
 	Tile::Tile* CheckTiles(sf::Vector2f mousePos);
 	bool CheckTileCollision(sf::FloatRect& aRect);

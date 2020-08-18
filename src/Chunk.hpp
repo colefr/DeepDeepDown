@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Tile/Tile.hpp"
+#include "Tile/Stone.hpp"
 
 class Chunk {
 public:
@@ -11,17 +12,22 @@ public:
 	void Draw(sf::RenderWindow* window);
 
 	Tile::Tile* GetTileAt(sf::Vector2f aPos);
+	int GetTileIndexAt(sf::Vector2f aPos);
+	sf::Vector2i GetTileIndexVectorAt(sf::Vector2f aPos);
+	void SetTileType(unsigned int aTileIndex, Tile::TileType type);
+	//void SetTileType(sf::Vector2i& aTileIndexVector, Tile::TileType type);
 
 public:
 	// Width and length of a chunk in Tiles
 	const int chunkSizeInTiles = 16;
 	const float tileSize = 32;
+	const float chunkSizeInPixels = chunkSizeInTiles * tileSize;	
 
 	// Maximum distance from midpoint of chunk to player for chunk to be Active
-	const float activeDistance = 400;
+	const float activeDistance = 800;
 
 	// Maximum distance from midpoint of chunk to player for chunk to be drawn
-	const float renderDistance = 400;
+	const float renderDistance = 800;
 
 	std::vector<Tile::Tile*>* tiles;
 

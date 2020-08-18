@@ -5,7 +5,8 @@
 namespace Tile {
 	class StaticTile : public Tile {
 	public:
-		StaticTile(sf::Vector2f aPosition, sf::Texture* aTexture);
+		StaticTile();
+		StaticTile(sf::Vector2f aPosition, const std::string& aTextureFileName);
 		virtual ~StaticTile();
 
 		void Update(double& deltaTime) override;
