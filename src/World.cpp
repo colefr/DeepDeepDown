@@ -16,17 +16,17 @@ World::World() {
 	tiles = new std::vector<Tile*>;	
 
 	// Starting Tiles
-	tiles->push_back(new StaticTile(player->GetPosition(), tileTexture));
+	tiles->push_back(new StaticTile(player->position, tileTexture));
 
-	tiles->push_back(new StaticTile(player->GetPosition() + sf::Vector2f(0, -32), tileTexture));
-	tiles->push_back(new StaticTile(player->GetPosition() + sf::Vector2f(0, 32), tileTexture));
-	tiles->push_back(new StaticTile(player->GetPosition() + sf::Vector2f(-32, 0), tileTexture));
-	tiles->push_back(new StaticTile(player->GetPosition() + sf::Vector2f(32, 0), tileTexture));
+	tiles->push_back(new StaticTile(player->position + sf::Vector2f(0, -32), tileTexture));
+	tiles->push_back(new StaticTile(player->position + sf::Vector2f(0, 32), tileTexture));
+	tiles->push_back(new StaticTile(player->position + sf::Vector2f(-32, 0), tileTexture));
+	tiles->push_back(new StaticTile(player->position + sf::Vector2f(32, 0), tileTexture));
 
-	tiles->push_back(new AnimatedTile(player->GetPosition() + sf::Vector2f(-32, -32), animTexture, 1));
-	tiles->push_back(new AnimatedTile(player->GetPosition() + sf::Vector2f(32, -32), animTexture, 2));
-	tiles->push_back(new AnimatedTile(player->GetPosition() + sf::Vector2f(-32, 32), animTexture, 3));
-	tiles->push_back(new AnimatedTile(player->GetPosition() + sf::Vector2f(32, 32), animTexture, 4));
+	tiles->push_back(new AnimatedTile(player->position + sf::Vector2f(-32, -32), animTexture, 1));
+	tiles->push_back(new AnimatedTile(player->position + sf::Vector2f(32, -32), animTexture, 2));
+	tiles->push_back(new AnimatedTile(player->position + sf::Vector2f(-32, 32), animTexture, 3));
+	tiles->push_back(new AnimatedTile(player->position + sf::Vector2f(32, 32), animTexture, 4));
 
 	tiles->at(0)->Hide();
 	std::cout << tiles->size() << " tiles." << std::endl;
@@ -99,14 +99,14 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 	// Horizontal (X-axis) Movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		MovePlayer(sf::Vector2f(-320, 0), deltaTime);
-		if (CheckTileCollision(player->GetSpriteRect())) {
+		if (CheckTileCollision(player->hitBox)) {
 			MovePlayer(sf::Vector2f(320, 0), deltaTime);
 		}
 	}
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		MovePlayer(sf::Vector2f(320, 0), deltaTime);
-		if (CheckTileCollision(player->GetSpriteRect())) {
+		if (CheckTileCollision(player->hitBox)) {
 			MovePlayer(sf::Vector2f(-320, 0), deltaTime);
 		}
 	}
@@ -114,14 +114,14 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 	// Vertical (Y-axis) Movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
 		MovePlayer(sf::Vector2f(0, 320), deltaTime);
-		if (CheckTileCollision(player->GetSpriteRect())) {
+		if (CheckTileCollision(player->hitBox)) {
 			MovePlayer(sf::Vector2f(0, -320), deltaTime);
 		}
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
 		MovePlayer(sf::Vector2f(0, -320), deltaTime);
-		if (CheckTileCollision(player->GetSpriteRect())) {
+		if (CheckTileCollision(player->hitBox)) {
 			MovePlayer(sf::Vector2f(0, 320), deltaTime);
 		}
 	}	
@@ -155,9 +155,9 @@ Tile* World::CheckTiles(sf::Vector2f aPosition) {
 	return nullptr;
 }
 
-bool World::CheckTileCollision(sf::FloatRect* aRect) {
+bool World::CheckTileCollision(sf::FloatRect& aRect) {
 	for (unsigned int i = 0; i < tiles->size(); i++) {
-		if (tiles->at(i)->tileRect->intersects(*aRect)) {
+		if (tiles->at(i)->tileRect->intersects(aRect)) {
 			if (tiles->at(i)->GetVisibility() == true) {
 				return true;
 			}

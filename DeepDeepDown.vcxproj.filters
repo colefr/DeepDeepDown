@@ -13,7 +13,10 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Tiles">
+    <Filter Include="Source Files\Entity">
+      <UniqueIdentifier>{933db1bb-3848-4dfd-a5fa-852f087ed42a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tile">
       <UniqueIdentifier>{023cfe04-eac3-4ef6-bbcd-60c6bc0019f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -27,26 +30,26 @@
     <ClCompile Include="src\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Cursor.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Tiles\Tile.cpp">
-      <Filter>Source Files\Tiles</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Tiles\AnimatedTile.cpp">
-      <Filter>Source Files\Tiles</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Tiles\StaticTile.cpp">
-      <Filter>Source Files\Tiles</Filter>
     </ClCompile>
     <ClCompile Include="src\Animator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Timer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Player.cpp">
+      <Filter>Source Files\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tile\AnimatedTile.cpp">
+      <Filter>Source Files\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tile\StaticTile.cpp">
+      <Filter>Source Files\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tile\Tile.cpp">
+      <Filter>Source Files\Tile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,26 +59,29 @@
     <ClInclude Include="src\World.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Player.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Cursor.hpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Tiles\Tile.hpp">
-      <Filter>Source Files\Tiles</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Tiles\AnimatedTile.hpp">
-      <Filter>Source Files\Tiles</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Tiles\StaticTile.hpp">
-      <Filter>Source Files\Tiles</Filter>
     </ClInclude>
     <ClInclude Include="src\Animator.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Timer.hpp">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity\Player.hpp">
+      <Filter>Source Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity\Entity.hpp">
+      <Filter>Source Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tile\AnimatedTile.hpp">
+      <Filter>Source Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tile\StaticTile.hpp">
+      <Filter>Source Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tile\Tile.hpp">
+      <Filter>Source Files\Tile</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

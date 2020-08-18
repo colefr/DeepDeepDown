@@ -1,8 +1,8 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "Tiles/StaticTile.hpp"
-#include "Tiles/AnimatedTile.hpp"
-#include "Player.hpp"
+#include "Tile/StaticTile.hpp"
+#include "Tile/AnimatedTile.hpp"
+#include "Entity/Player.hpp"
 #include "Cursor.hpp"
 #include <vector>
 
@@ -22,7 +22,7 @@ private:
 	std::vector<Tile*>* tiles;
 	Cursor* cursor;
 	Tile* CheckTiles(sf::Vector2f mousePos);
-	bool CheckTileCollision(sf::FloatRect* aRect);
+	bool CheckTileCollision(sf::FloatRect& aRect);
 
 	sf::Texture* tileTexture;
 	sf::Texture* animTexture;

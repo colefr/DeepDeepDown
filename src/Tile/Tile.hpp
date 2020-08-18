@@ -2,7 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include <string>
 #include <iostream>
-#include "../Player.hpp"
+#include "../Entity/Player.hpp"
 
 class Tile {
 public:
