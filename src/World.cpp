@@ -18,35 +18,14 @@ World::World() {
 	chunks->push_back(new Chunk(player->position));
 
 	// Starting Tiles
-	for (int i = 0; i < 256; i++) {
-		chunks->at(0)->SetTileType(i, Tile::TileType::Stone);
-	}
-
-
-	//tiles->push_back(new Tile::StaticTile(player->position, tileTexture));
-
-	//tiles->push_back(new Tile::StaticTile(player->position + sf::Vector2f(0, -32), tileTexture));
-	//tiles->push_back(new Tile::StaticTile(player->position + sf::Vector2f(0, 32), tileTexture));
-	//tiles->push_back(new Tile::StaticTile(player->position + sf::Vector2f(-32, 0), tileTexture));
-	//tiles->push_back(new Tile::StaticTile(player->position + sf::Vector2f(32, 0), tileTexture));
-
-	//tiles->push_back(new Tile::AnimatedTile(player->position + sf::Vector2f(-32, -32), animTexture, 1));
-	//tiles->push_back(new Tile::AnimatedTile(player->position + sf::Vector2f(32, -32), animTexture, 2));
-	//tiles->push_back(new Tile::AnimatedTile(player->position + sf::Vector2f(-32, 32), animTexture, 3));
-	//tiles->push_back(new Tile::AnimatedTile(player->position + sf::Vector2f(32, 32), animTexture, 4));
-
-	//tiles->at(0)->Hide();
-	//std::cout << tiles->size() << " tiles." << std::endl;
+	chunks->at(0)->SetTileType(135, Tile::TileType::Stone);
+	chunks->at(0)->SetTileType(137, Tile::TileType::Stone);
+	chunks->at(0)->SetTileType(152, Tile::TileType::Stone);
+	chunks->at(0)->SetTileType(120, Tile::TileType::Stone);
 }
 
 World::~World() {
 	delete player;
-
-	/*for (unsigned int i = 0; i < tiles->size(); i++) {
-		delete tiles->at(i);
-	}*/
-
-	//delete tiles;
 
 	for (unsigned int i = 0; i < chunks->size(); i++) {
 		delete chunks->at(i);
@@ -61,11 +40,7 @@ World::~World() {
 
 void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) {
 	player->Update(deltaTime);
-	cursor->Update(deltaTime, window);	
-
-	/*for (unsigned int i = 0; i < tiles->size(); i++) {
-		tiles->at(i)->Update(deltaTime);
-	}*/
+	cursor->Update(deltaTime, window);
 	
 	for (unsigned int i = 0; i < chunks->size(); i++) {
 		chunks->at(i)->Update(deltaTime, player);
