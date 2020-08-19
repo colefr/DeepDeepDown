@@ -20,6 +20,7 @@ namespace Tile {
 
 		virtual void OnLeftClick(Cursor* cursor);
 		virtual void OnRightClick(Cursor* cursor);
+		virtual void OnWorldEvent();
 
 	public:
 		sf::Sprite* sprite;
@@ -40,6 +41,9 @@ namespace Tile {
 		Empty(sf::Vector2f& aPosition);
 		~Empty();
 
+		void OnWorldEvent() override;
+
+	public:
 		TileType type = TileType::Empty;
 	};
 }

@@ -6,7 +6,7 @@ World::World() {
 	player = new Player();
 
 	chunks = new std::vector<Chunk*>;
-	chunks->push_back(new Chunk(player->position));
+	chunks->push_back(new Chunk(sf::Vector2f(0, 0)));
 
 	// Starting Tiles
 	chunks->at(0)->SetTileType(135, Tile::TileType::Stone);
@@ -39,63 +39,27 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		sf::Vector2f mousePos = sf::Vector2f(cursor->GetPosition());
-		Chunk* clickedChunk = GetChunkAt(mousePos);
+		Tile::Tile* clickedTile = GetTileAt(mousePos);
 
-		// If we didn't click on a chunk, skip this section
-		if (clickedChunk != nullptr) {
-			int clickedTileIndex = clickedChunk->GetTileIndexAt(mousePos);
+		if (clickedTile != nullptr) {
+			// Process OnLeftClick() events for that tile
+			clickedTile->OnLeftClick(cursor);
 
-			// If for some reason we clicked on a chunk, but there's no tile there, skip this section too
-			if (clickedTileIndex != -1) {
-				std::cout << "Clicked tile " << clickedTileIndex << std::endl;
-				clickedChunk->tiles->at(clickedTileIndex)->OnLeftClick(cursor);
-			}
+			// If Stone is broken and there are adjacent Empty tiles, the Empty tiles become Stone tiles
+			TurnSurroundingEmptyTilesToStone(clickedTile->position);
 		}
 	}
 
-//	// Left click "breaks" a tile
-//	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-//		Tile::Tile* tileToUpdate = CheckTiles(cursor->GetPosition());
-//		if (tileToUpdate != nullptr) {
-//			//std::cout << "Clicked a Tile!" << std::endl;
-//
-//			// This checks if there are tiles around the tile clicked on. If yes, no nothing.
-//			// If not, then replace empty spaces with new stone tiles.
-//
-//			// Check Up
-//			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(0, -32)) == nullptr) {
-//				tiles->push_back(new Tile::StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(0, -32), tileTexture));
-//			}
-//
-//			// Check Down
-//			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(0, 32)) == nullptr) {
-//				tiles->push_back(new Tile::StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(0, 32), tileTexture));
-//			}
-//
-//			// Check Left
-//			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(-32, 0)) == nullptr) {
-//				tiles->push_back(new Tile::StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(-32, 0), tileTexture));
-//			}
-//
-//			//Check Right
-//			if (CheckTiles(tileToUpdate->GetPosition() + sf::Vector2f(32, 0)) == nullptr) {
-//				tiles->push_back(new Tile::StaticTile(tileToUpdate->GetPosition() + sf::Vector2f(32, 0), tileTexture));
-//			}
-//
-//			// Hide the tile, but keep it there, both for the null-tile check, and also so it
-//			// can be manipulated in the future
-//			tileToUpdate->Hide();
-//		}
-//	}
-//
-//	// Right click "places" a tile
-//	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-//		Tile::Tile* tileToUpdate = CheckTiles(cursor->GetPosition());
-//		if (tileToUpdate != nullptr) {
-//			tileToUpdate->Show();
-//		}
-//	}
-//
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+		sf::Vector2f mousePos = sf::Vector2f(cursor->GetPosition());
+		Tile::Tile* clickedTile = GetTileAt(mousePos);
+
+		if (clickedTile != nullptr) {
+			// Process OnLeftClick() events for that tile
+			clickedTile->OnRightClick(cursor);
+		}
+	}
+
 //	// Horizontal (X-axis) Movement
 //	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 //		MovePlayer(sf::Vector2f(-320, 0), deltaTime);
@@ -152,9 +116,15 @@ Chunk* World::GetChunkAt(sf::Vector2f aPosition) {
 }
 
 Tile::Tile* World::GetTileAt(sf::Vector2f aPosition) {
-	for (unsigned int i = 0; i < chunks->size(); i++) {
-		if (chunks->at(i)->GetTileAt(aPosition) != nullptr) {
-			return chunks->at(i)->GetTileAt(aPosition);
+	Chunk* clickedChunk = GetChunkAt(aPosition);
+
+	// If aPosition doesn't land in a chunk, skip this section
+	if (clickedChunk != nullptr) {
+		int clickedTileIndex = clickedChunk->GetTileIndexAt(aPosition);
+
+		// If for some reason landed in a chunk, but there's no tile there, skip this section too
+		if (clickedTileIndex != -1) {
+			return clickedChunk->tiles->at(clickedTileIndex);
 		}
 	}
 
@@ -171,16 +141,35 @@ int World::GetTileIndexAt(sf::Vector2f aPosition) {
 	return -1;
 }
 
-//Tile::Tile* World::CheckTiles(sf::Vector2f aPosition) {
-//	for (unsigned int i = 0; i < tiles->size(); i++) {
-//		if (tiles->at(i)->hitBox.contains(aPosition)) {
-//			return tiles->at(i)->GetTilePointer();
-//		}
-//	}
-//
-//	return nullptr;
-//}
-//
+void World::TurnSurroundingEmptyTilesToStone(sf::Vector2f aPosition) {
+	Tile::Tile* tileToCheck = nullptr;
+
+	// Check North (-y)
+	tileToCheck = GetTileAt(aPosition + sf::Vector2f(0, -32));
+	if (tileToCheck != nullptr && tileToCheck->type == Tile::TileType::Empty) {
+		tileToCheck->OnWorldEvent();
+	}
+
+	// Check South (+y)
+	tileToCheck = GetTileAt(aPosition + sf::Vector2f(0, +32));
+	if (tileToCheck != nullptr && tileToCheck->type == Tile::TileType::Empty) {
+		tileToCheck->OnWorldEvent();
+	}
+
+	// Check West (-x)
+	tileToCheck = GetTileAt(aPosition + sf::Vector2f(-32, 0));
+	if (tileToCheck != nullptr && tileToCheck->type == Tile::TileType::Empty) {
+		tileToCheck->OnWorldEvent();
+	}
+
+	// Check East (+x)
+	tileToCheck = GetTileAt(aPosition + sf::Vector2f(32, 0));
+	if (tileToCheck != nullptr && tileToCheck->type == Tile::TileType::Empty) {
+		tileToCheck->OnWorldEvent();
+	}
+}
+
+
 //bool World::CheckTileCollision(sf::FloatRect& aRect) {
 //	for (unsigned int i = 0; i < tiles->size(); i++) {
 //		if (tiles->at(i)->hitBox.intersects(aRect)) {

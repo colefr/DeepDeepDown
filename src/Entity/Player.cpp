@@ -1,10 +1,12 @@
 #include "Player.hpp"
 
 Player::Player() :
-	Entity(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(28.0f, 28.0f), "assets/img/player.png"),
+	Entity(sf::Vector2f(2.0f, 2.0f), sf::Vector2f(28.0f, 28.0f), "assets/img/player.png"),
 	animator(new Animator(sprite, 4)),
 	bobTime(0.0f)
-{}
+{
+	sprite->setOrigin(sf::Vector2f(2.0f, 2.0f));
+}
 
 Player::~Player() {
 	delete animator;

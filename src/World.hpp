@@ -25,4 +25,6 @@ private:
 	Chunk* GetChunkAt(sf::Vector2f aPosition);
 	Tile::Tile* GetTileAt(sf::Vector2f aPosition);
 	int GetTileIndexAt(sf::Vector2f aPosition);
+
+	void TurnSurroundingEmptyTilesToStone(sf::Vector2f aPosition);
 };

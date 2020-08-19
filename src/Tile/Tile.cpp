@@ -13,6 +13,7 @@ namespace Tile {
 
 	void Tile::OnLeftClick(Cursor* cursor) {}
 	void Tile::OnRightClick(Cursor* cursor)	{}
+	void Tile::OnWorldEvent() {}
 
 
 	// Empty Tile ------------------------------
@@ -21,4 +22,9 @@ namespace Tile {
 	{}
 
 	Empty::~Empty() {}
+
+	void Empty::OnWorldEvent() {
+		changeTileTypeFlag = true;
+		typeToChangeTo = TileType::Stone;
+	}
 }

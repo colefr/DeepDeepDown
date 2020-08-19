@@ -7,7 +7,10 @@ namespace Tile {
 	public:
 		Floor(sf::Vector2f& aPosition);
 
+		void OnLeftClick(Cursor* cursor) override;
+		void OnRightClick(Cursor* cursor) override;
+
+	public:
 		TileType type = TileType::Floor;
-	private:
 	};
 }
