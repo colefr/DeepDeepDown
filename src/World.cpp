@@ -37,7 +37,6 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 		chunks->at(i)->Update(deltaTime, player);
 	}
 
-	// Left click to "break" a stone tile into a floor tile, and turn adjacent empty tiles into stone tiles
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		sf::Vector2f mousePos = sf::Vector2f(cursor->GetPosition());
 		Chunk* clickedChunk = GetChunkAt(mousePos);
@@ -49,6 +48,7 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 			// If for some reason we clicked on a chunk, but there's no tile there, skip this section too
 			if (clickedTileIndex != -1) {
 				std::cout << "Clicked tile " << clickedTileIndex << std::endl;
+				clickedChunk->tiles->at(clickedTileIndex)->OnLeftClick(cursor);
 			}
 		}
 	}

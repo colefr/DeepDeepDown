@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "Entity/Player.hpp"
 #include "Tile/Tile.hpp"
 #include "Tile/Stone.hpp"
 #include "Tile/Floor.hpp"
@@ -36,4 +37,7 @@ public:
 
 	bool isActive;
 	bool isVisible;
+
+private:
+	void CheckForTileChangeFlags();
 };

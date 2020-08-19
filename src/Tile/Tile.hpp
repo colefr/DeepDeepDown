@@ -1,8 +1,8 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "../Cursor.hpp"
 #include <string>
 #include <iostream>
-#include "../Entity/Player.hpp"
 
 namespace Tile {
 	enum class TileType {
@@ -18,6 +18,10 @@ namespace Tile {
 		virtual void Draw(sf::RenderWindow* window);
 		virtual void Update(double& deltaTime);
 
+		virtual void OnLeftClick(Cursor* cursor);
+		virtual void OnRightClick(Cursor* cursor);
+
+	public:
 		sf::Sprite* sprite;
 		sf::Texture* texture;
 
@@ -26,6 +30,9 @@ namespace Tile {
 
 		bool isVisible = true;
 		TileType type = TileType::Empty;
+
+		bool changeTileTypeFlag = false;
+		TileType typeToChangeTo = TileType::Empty;
 	};
 
 	class Empty : public Tile {

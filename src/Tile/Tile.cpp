@@ -11,6 +11,9 @@ namespace Tile {
 	void Tile::Draw(sf::RenderWindow* window) {}
 	void Tile::Update(double& deltaTime) {}
 
+	void Tile::OnLeftClick(Cursor* cursor) {}
+	void Tile::OnRightClick(Cursor* cursor)	{}
+
 
 	// Empty Tile ------------------------------
 	Empty::Empty(sf::Vector2f& aPosition) :

@@ -5,4 +5,12 @@ namespace Tile {
 		StaticTile(aPosition, "assets/img/stone.png")
 	{
 	}
+
+	void Stone::OnLeftClick(Cursor* cursor)	{
+		changeTileTypeFlag = true;
+		typeToChangeTo = TileType::Floor;
+	}
+
+	void Stone::OnRightClick(Cursor* cursor) {
+	}
 }

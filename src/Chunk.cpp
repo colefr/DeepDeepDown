@@ -53,6 +53,8 @@ void Chunk::Update(double& deltaTime, Player* aPlayer) {
 		isVisible = true;
 	}
 	else isVisible = false;
+
+	CheckForTileChangeFlags();
 }
 
 void Chunk::Draw(sf::RenderWindow* window) {
@@ -125,6 +127,14 @@ void Chunk::SetTileType(unsigned int aTileIndex, Tile::TileType type) {
 
 	default:
 		break;
+	}
+}
+
+void Chunk::CheckForTileChangeFlags() {
+	for (unsigned int i = 0; i < tiles->size(); i++) {
+		if (tiles->at(i)->changeTileTypeFlag) {
+			SetTileType(i, tiles->at(i)->typeToChangeTo);
+		}
 	}
 }
 
