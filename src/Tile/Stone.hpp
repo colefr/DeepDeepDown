@@ -8,6 +8,6 @@ namespace Tile {
 	public:
 		Stone(sf::Vector2f& aPosition);
 
-		const std::string textureFileString = "assets/img/stone.png";
+		TileType type = TileType::Stone;
 	};
 }

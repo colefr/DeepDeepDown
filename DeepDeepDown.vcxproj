@@ -156,6 +156,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Program.cpp" />
     <ClCompile Include="src\Tile\AnimatedTile.cpp" />
+    <ClCompile Include="src\Tile\Floor.cpp" />
     <ClCompile Include="src\Tile\StaticTile.cpp" />
     <ClCompile Include="src\Tile\Stone.cpp" />
     <ClCompile Include="src\Tile\Tile.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="src\Entity\Player.hpp" />
     <ClInclude Include="src\Program.hpp" />
     <ClInclude Include="src\Tile\AnimatedTile.hpp" />
+    <ClInclude Include="src\Tile\Floor.hpp" />
     <ClInclude Include="src\Tile\StaticTile.hpp" />
     <ClInclude Include="src\Tile\Stone.hpp" />
     <ClInclude Include="src\Tile\Tile.hpp" />

@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "Tile/Tile.hpp"
 #include "Tile/Stone.hpp"
+#include "Tile/Floor.hpp"
 
 class Chunk {
 public:

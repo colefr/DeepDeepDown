@@ -4,16 +4,7 @@ World::World() {
 	cursor = new Cursor();
 
 	player = new Player();
-	const std::string imgPath = "assets/img/stone.png";
-	const std::string animImgPath = "assets/img/shiny_rock.png";
 
-	tileTexture = new sf::Texture();
-	tileTexture->loadFromFile(imgPath);
-
-	animTexture = new sf::Texture();
-	animTexture->loadFromFile(animImgPath);
-
-	//tiles = new std::vector<Tile::Tile*>;	
 	chunks = new std::vector<Chunk*>;
 	chunks->push_back(new Chunk(player->position));
 
@@ -22,6 +13,7 @@ World::World() {
 	chunks->at(0)->SetTileType(137, Tile::TileType::Stone);
 	chunks->at(0)->SetTileType(152, Tile::TileType::Stone);
 	chunks->at(0)->SetTileType(120, Tile::TileType::Stone);
+	chunks->at(0)->SetTileType(136, Tile::TileType::Floor);
 }
 
 World::~World() {
@@ -33,8 +25,6 @@ World::~World() {
 	chunks->clear();
 	delete chunks;
 
-	delete tileTexture;
-	delete animTexture;
 	delete cursor;
 }
 
@@ -120,11 +110,7 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 //	}	
 }
 
-void World::Draw(sf::RenderWindow* window) {
-	/*for (unsigned int i = 0; i < tiles->size(); i++) {
-		tiles->at(i)->Draw(window);
-	}*/
-	
+void World::Draw(sf::RenderWindow* window) {	
 	for (unsigned int i = 0; i < chunks->size(); i++) {
 		chunks->at(i)->Draw(window);
 	}

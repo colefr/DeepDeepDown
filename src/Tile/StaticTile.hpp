@@ -5,7 +5,6 @@
 namespace Tile {
 	class StaticTile : public Tile {
 	public:
-		StaticTile();
 		StaticTile(sf::Vector2f aPosition, const std::string& aTextureFileName);
 		virtual ~StaticTile();
 

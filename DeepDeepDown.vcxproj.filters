@@ -60,6 +60,9 @@
     <ClCompile Include="src\Tile\Stone.cpp">
       <Filter>Source Files\Tile</Filter>
     </ClCompile>
+    <ClCompile Include="src\Tile\Floor.cpp">
+      <Filter>Source Files\Tile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Program.hpp">
@@ -96,6 +99,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Tile\Stone.hpp">
+      <Filter>Source Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tile\Floor.hpp">
       <Filter>Source Files\Tile</Filter>
     </ClInclude>
   </ItemGroup>

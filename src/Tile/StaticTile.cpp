@@ -1,9 +1,6 @@
 #include "StaticTile.hpp"
 
 namespace Tile {
-	StaticTile::StaticTile() {
-	}
-
 	StaticTile::StaticTile(sf::Vector2f aPosition, const std::string& aTextureFileName)
 	{
 		position = aPosition;

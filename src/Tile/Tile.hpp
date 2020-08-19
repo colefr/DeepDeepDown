@@ -39,5 +39,7 @@ namespace Tile {
 
 		void Draw(sf::RenderWindow* window) override;
 		void Update(double& deltaTime) override;
+
+		TileType type = TileType::Empty;
 	};
 }

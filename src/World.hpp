@@ -25,7 +25,4 @@ private:
 	Cursor* cursor;
 	Tile::Tile* CheckTiles(sf::Vector2f mousePos);
 	bool CheckTileCollision(sf::FloatRect& aRect);
-
-	sf::Texture* tileTexture;
-	sf::Texture* animTexture;
 };

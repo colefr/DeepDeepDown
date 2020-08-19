@@ -118,6 +118,10 @@ void Chunk::SetTileType(unsigned int aTileIndex, Tile::TileType type) {
 
 	case Tile::TileType::Stone:
 		tiles->at(aTileIndex) = new Tile::Stone(tilePixelPosition);
+		break;
+
+	case Tile::TileType::Floor:
+		tiles->at(aTileIndex) = new Tile::Floor(tilePixelPosition);
 
 	default:
 		break;
