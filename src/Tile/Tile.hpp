@@ -13,21 +13,17 @@ namespace Tile {
 
 	class Tile {
 	public:
-		sf::Vector2f GetPosition();
-		bool GetVisibility();
-
-		void Show();
-		void Hide();
+		Tile(sf::Vector2f& aPosition);
 
 		virtual void Draw(sf::RenderWindow* window);
 		virtual void Update(double& deltaTime);
 
-		Tile* GetTilePointer();
+		sf::Sprite* sprite;
+		sf::Texture* texture;
 
-		sf::Sprite* sprite = nullptr;
-		sf::Texture* texture = nullptr;
 		sf::FloatRect hitBox;
 		sf::Vector2f position;
+
 		bool isVisible = true;
 		TileType type = TileType::Empty;
 	};
@@ -36,9 +32,6 @@ namespace Tile {
 	public:
 		Empty(sf::Vector2f& aPosition);
 		~Empty();
-
-		void Draw(sf::RenderWindow* window) override;
-		void Update(double& deltaTime) override;
 
 		TileType type = TileType::Empty;
 	};

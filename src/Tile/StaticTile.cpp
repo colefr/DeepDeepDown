@@ -1,23 +1,20 @@
 #include "StaticTile.hpp"
 
 namespace Tile {
-	StaticTile::StaticTile(sf::Vector2f aPosition, const std::string& aTextureFileName)
+	StaticTile::StaticTile(sf::Vector2f aPosition, const std::string& aTextureFileName) :
+		Tile(aPosition)
 	{
-		position = aPosition;
-
 		texture = new sf::Texture();
 		texture->loadFromFile(aTextureFileName);
 
 		sprite = new sf::Sprite();
-		sprite->setOrigin(sf::Vector2f(16, 16));
 		sprite->setPosition(aPosition);
 		sprite->setTexture(*texture);
-
-		hitBox = sf::FloatRect(aPosition - sf::Vector2f(16, 16), sf::Vector2f(32, 32));
 	}
 
 	StaticTile::~StaticTile() {
 		delete sprite;
+		delete texture;
 	}
 
 	void StaticTile::Update(double& deltaTime) {
