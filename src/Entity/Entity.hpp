@@ -3,6 +3,10 @@
 
 class Entity {
 public:
+	Entity(sf::Vector2f aPosition, sf::Vector2f aSize, const std::string& aTextureFilePath, bool aIsVisible = true);
+	virtual ~Entity();
+
+	virtual void Update(double& deltaTime);
 	virtual void Draw(sf::RenderWindow* window);
 
 	sf::Sprite* sprite;

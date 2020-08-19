@@ -10,7 +10,7 @@ public:
 	Player();
 	~Player();
 
-	void Update(double& deltaTime);
+	void Update(double& deltaTime) override;
 	void Move(sf::Vector2f aDistance);
 
 private:

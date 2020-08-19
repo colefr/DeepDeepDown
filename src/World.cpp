@@ -171,10 +171,6 @@ int World::GetTileIndexAt(sf::Vector2f aPosition) {
 	return -1;
 }
 
-Player* World::GetPlayer() {
-	return player;
-}
-
 //Tile::Tile* World::CheckTiles(sf::Vector2f aPosition) {
 //	for (unsigned int i = 0; i < tiles->size(); i++) {
 //		if (tiles->at(i)->hitBox.contains(aPosition)) {
