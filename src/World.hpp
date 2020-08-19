@@ -15,7 +15,6 @@ public:
 	void Update(double& deltaTime, sf::RenderWindow* window, sf::View* view);
 	void Draw(sf::RenderWindow* window);
 
-	void MovePlayer(sf::Vector2f aDistance, double& deltaTime);
 	Player* GetPlayer();
 
 private:
@@ -23,6 +22,13 @@ private:
 	//std::vector<Tile::Tile*>* tiles;
 	std::vector<Chunk*>* chunks;
 	Cursor* cursor;
-	Tile::Tile* CheckTiles(sf::Vector2f mousePos);
-	bool CheckTileCollision(sf::FloatRect& aRect);
+
+	void MovePlayer(sf::Vector2f aDistance, double& deltaTime);
+
+	Chunk* GetChunkAt(sf::Vector2f aPosition);
+	Tile::Tile* GetTileAt(sf::Vector2f aPosition);
+	int GetTileIndexAt(sf::Vector2f aPosition);
+
+	/*Tile::Tile* CheckTiles(sf::Vector2f mousePos);
+	bool CheckTileCollision(sf::FloatRect& aRect);*/
 };

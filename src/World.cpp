@@ -13,6 +13,7 @@ World::World() {
 	chunks->at(0)->SetTileType(137, Tile::TileType::Stone);
 	chunks->at(0)->SetTileType(152, Tile::TileType::Stone);
 	chunks->at(0)->SetTileType(120, Tile::TileType::Stone);
+
 	chunks->at(0)->SetTileType(136, Tile::TileType::Floor);
 }
 
@@ -34,6 +35,22 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 	
 	for (unsigned int i = 0; i < chunks->size(); i++) {
 		chunks->at(i)->Update(deltaTime, player);
+	}
+
+	// Left click to "break" a stone tile into a floor tile, and turn adjacent empty tiles into stone tiles
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		sf::Vector2f mousePos = sf::Vector2f(cursor->GetPosition());
+		Chunk* clickedChunk = GetChunkAt(mousePos);
+
+		// If we didn't click on a chunk, skip this section
+		if (clickedChunk != nullptr) {
+			int clickedTileIndex = clickedChunk->GetTileIndexAt(mousePos);
+
+			// If for some reason we clicked on a chunk, but there's no tile there, skip this section too
+			if (clickedTileIndex != -1) {
+				std::cout << "Clicked tile " << clickedTileIndex << std::endl;
+			}
+		}
 	}
 
 //	// Left click "breaks" a tile
@@ -122,6 +139,36 @@ void World::Draw(sf::RenderWindow* window) {
 void World::MovePlayer(sf::Vector2f aDistance, double& deltaTime) {
 	sf::Vector2f distance = sf::Vector2f(aDistance.x * (float)deltaTime, aDistance.y * (float)deltaTime);
 	player->Move(distance);
+}
+
+Chunk* World::GetChunkAt(sf::Vector2f aPosition) {
+	for (unsigned int i = 0; i < chunks->size(); i++) {
+		if (chunks->at(i)->chunkBorder.contains(aPosition)) {
+			return chunks->at(i);
+		}
+	}
+
+	return nullptr;
+}
+
+Tile::Tile* World::GetTileAt(sf::Vector2f aPosition) {
+	for (unsigned int i = 0; i < chunks->size(); i++) {
+		if (chunks->at(i)->GetTileAt(aPosition) != nullptr) {
+			return chunks->at(i)->GetTileAt(aPosition);
+		}
+	}
+
+	return nullptr;
+}
+
+int World::GetTileIndexAt(sf::Vector2f aPosition) {
+	for (unsigned int i = 0; i < chunks->size(); i++) {
+		if (chunks->at(i)->GetTileAt(aPosition) != nullptr) {
+			return chunks->at(i)->GetTileIndexAt(aPosition);
+		}
+	}
+
+	return -1;
 }
 
 Player* World::GetPlayer() {

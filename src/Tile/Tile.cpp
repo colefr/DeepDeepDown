@@ -32,7 +32,7 @@ namespace Tile {
 
 	Empty::Empty(sf::Vector2f& aPosition) {
 		position = aPosition;
-		hitBox = sf::FloatRect(aPosition, sf::Vector2f(32, 32));
+		hitBox = sf::FloatRect(aPosition - sf::Vector2f(16, 16), sf::Vector2f(32, 32));
 	}
 
 	Empty::~Empty() {

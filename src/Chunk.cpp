@@ -68,11 +68,11 @@ void Chunk::Draw(sf::RenderWindow* window) {
 Tile::Tile* Chunk::GetTileAt(sf::Vector2f aPos) {
 	// First make sure the point being checked is actually in this chunk
 	if (chunkBorder.contains(aPos)) {
-		sf::Vector2f posRelativeToChunk = sf::Vector2f(chunkBorder.left, chunkBorder.top) - aPos;
+		sf::Vector2f posRelativeToChunk = sf::Vector2f(chunkBorder.left, chunkBorder.top) + aPos;
 		unsigned int xIndex = (int)posRelativeToChunk.x / (int)tileSize;
 		unsigned int yIndex = (int)posRelativeToChunk.y / (int)tileSize;
 
-		return tiles->at(xIndex * yIndex);
+		return tiles->at(xIndex + (xIndex * yIndex));
 	}
 
 	return nullptr;
@@ -82,10 +82,10 @@ int Chunk::GetTileIndexAt(sf::Vector2f aPos) {
 	// First make sure the point being checked is actually in this chunk
 	if (chunkBorder.contains(aPos)) {
 		sf::Vector2f posRelativeToChunk = sf::Vector2f(chunkBorder.left, chunkBorder.top) - aPos;
-		unsigned int xIndex = (int)posRelativeToChunk.x / (int)tileSize;
-		unsigned int yIndex = (int)posRelativeToChunk.y / (int)tileSize;
+		unsigned int xIndex = abs((int)posRelativeToChunk.x / (int)tileSize);
+		unsigned int yIndex = abs((int)posRelativeToChunk.y / (int)tileSize);
 
-		return (xIndex * yIndex);
+		return (chunkSizeInTiles * xIndex + yIndex);
 	}
 
 	return -1;
@@ -94,11 +94,11 @@ int Chunk::GetTileIndexAt(sf::Vector2f aPos) {
 sf::Vector2i Chunk::GetTileIndexVectorAt(sf::Vector2f aPos) {
 	// First make sure the point being checked is actually in this chunk
 	if (chunkBorder.contains(aPos)) {
-		sf::Vector2f posRelativeToChunk = sf::Vector2f(chunkBorder.left, chunkBorder.top) - aPos;
+		sf::Vector2f posRelativeToChunk = sf::Vector2f(chunkBorder.left, chunkBorder.top) + aPos;
 		unsigned int xIndex = (int)posRelativeToChunk.x / (int)tileSize;
 		unsigned int yIndex = (int)posRelativeToChunk.y / (int)tileSize;
 
-		return sf::Vector2i(xIndex, yIndex);
+		return sf::Vector2i(xIndex, (xIndex * yIndex));
 	}
 
 	return sf::Vector2i(-1, -1);

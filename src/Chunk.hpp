@@ -16,7 +16,6 @@ public:
 	int GetTileIndexAt(sf::Vector2f aPos);
 	sf::Vector2i GetTileIndexVectorAt(sf::Vector2f aPos);
 	void SetTileType(unsigned int aTileIndex, Tile::TileType type);
-	//void SetTileType(sf::Vector2i& aTileIndexVector, Tile::TileType type);
 
 public:
 	// Width and length of a chunk in Tiles

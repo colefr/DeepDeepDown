@@ -29,7 +29,7 @@ namespace Tile {
 		sf::FloatRect hitBox;
 		sf::Vector2f position;
 		bool isVisible = true;
-		TileType tileType = TileType::Empty;
+		TileType type = TileType::Empty;
 	};
 
 	class Empty : public Tile {
