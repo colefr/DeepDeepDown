@@ -13,7 +13,7 @@ namespace Tile {
 
 	class Tile {
 	public:
-		Tile(sf::Vector2f& aPosition);
+		Tile(sf::Vector2f& aPosition, bool aCollidesWithEntities = false);
 
 		virtual void Draw(sf::RenderWindow* window);
 		virtual void Update(double& deltaTime);
@@ -34,6 +34,8 @@ namespace Tile {
 
 		bool changeTileTypeFlag = false;
 		TileType typeToChangeTo = TileType::Empty;
+
+		bool collidesWithEntities = false;
 	};
 
 	class Empty : public Tile {

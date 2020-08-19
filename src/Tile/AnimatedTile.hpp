@@ -6,7 +6,7 @@
 namespace Tile {
 	class AnimatedTile : public StaticTile {
 	public:
-		AnimatedTile(sf::Vector2f aPosition, const std::string& aTextureFileName, float aFrameRate);
+		AnimatedTile(sf::Vector2f aPosition, const std::string& aTextureFileName, float aFrameRate, bool aCollidesWithEntities = false);
 		~AnimatedTile() override;
 
 		void Update(double& deltaTime) override;

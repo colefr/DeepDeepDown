@@ -29,7 +29,7 @@ World::~World() {
 	delete cursor;
 }
 
-void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) {
+void World::Update(double& deltaTime, sf::RenderWindow* window) {
 	player->Update(deltaTime);
 	cursor->Update(deltaTime, window);
 	
@@ -60,35 +60,38 @@ void World::Update(double& deltaTime, sf::RenderWindow* window, sf::View* view) 
 		}
 	}
 
-//	// Horizontal (X-axis) Movement
-//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-//		MovePlayer(sf::Vector2f(-320, 0), deltaTime);
-//		if (CheckTileCollision(player->hitBox)) {
-//			MovePlayer(sf::Vector2f(320, 0), deltaTime);
-//		}
-//	}
-//	
-//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-//		MovePlayer(sf::Vector2f(320, 0), deltaTime);
-//		if (CheckTileCollision(player->hitBox)) {
-//			MovePlayer(sf::Vector2f(-320, 0), deltaTime);
-//		}
-//	}
-//
-//	// Vertical (Y-axis) Movement
-//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-//		MovePlayer(sf::Vector2f(0, 320), deltaTime);
-//		if (CheckTileCollision(player->hitBox)) {
-//			MovePlayer(sf::Vector2f(0, -320), deltaTime);
-//		}
-//	}
-//
-//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-//		MovePlayer(sf::Vector2f(0, -320), deltaTime);
-//		if (CheckTileCollision(player->hitBox)) {
-//			MovePlayer(sf::Vector2f(0, 320), deltaTime);
-//		}
-//	}	
+	// Player Movement
+	// North (-y)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		player->Move(sf::Vector2f(0, -320), deltaTime);
+		if (CheckTileCollision(player)) {
+			player->Move(sf::Vector2f(0, 320), deltaTime);
+		}
+	}
+
+	// South (+y)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+		player->Move(sf::Vector2f(0, 320), deltaTime);
+		if (CheckTileCollision(player)) {
+			player->Move(sf::Vector2f(0, -320), deltaTime);
+		}
+	}
+
+	// West (-x)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		player->Move(sf::Vector2f(-320, 0), deltaTime);
+		if (CheckTileCollision(player)) {
+			player->Move(sf::Vector2f(320, 0), deltaTime);
+		}
+	}
+
+	// East (+x)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		player->Move(sf::Vector2f(320, 0), deltaTime);
+		if (CheckTileCollision(player)) {
+			player->Move(sf::Vector2f(-320, 0), deltaTime);
+		}
+	}
 }
 
 void World::Draw(sf::RenderWindow* window) {	
@@ -98,11 +101,6 @@ void World::Draw(sf::RenderWindow* window) {
 
 	player->Draw(window);
 	cursor->Draw(window);
-}
-
-void World::MovePlayer(sf::Vector2f aDistance, double& deltaTime) {
-	sf::Vector2f distance = sf::Vector2f(aDistance.x * (float)deltaTime, aDistance.y * (float)deltaTime);
-	player->Move(distance);
 }
 
 Chunk* World::GetChunkAt(sf::Vector2f aPosition) {
@@ -141,6 +139,26 @@ int World::GetTileIndexAt(sf::Vector2f aPosition) {
 	return -1;
 }
 
+bool World::CheckTileCollision(Entity* entity) {
+	sf::FloatRect entityHitBox = entity->hitBox;
+
+	for (unsigned int i = 0; i < chunks->size(); i++) {
+		if (chunks->at(i)->chunkBorder.intersects(entityHitBox)) {
+			Chunk* chunkIntersectingEntity = chunks->at(i);
+
+			for (unsigned int j = 0; j < chunkIntersectingEntity->tiles->size(); j++) {
+				if (chunkIntersectingEntity->tiles->at(j)->hitBox.intersects(entityHitBox)) {
+					if (chunkIntersectingEntity->tiles->at(j)->collidesWithEntities) {
+						return true;
+					}
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
 void World::TurnSurroundingEmptyTilesToStone(sf::Vector2f aPosition) {
 	Tile::Tile* tileToCheck = nullptr;
 
@@ -168,16 +186,3 @@ void World::TurnSurroundingEmptyTilesToStone(sf::Vector2f aPosition) {
 		tileToCheck->OnWorldEvent();
 	}
 }
-
-
-//bool World::CheckTileCollision(sf::FloatRect& aRect) {
-//	for (unsigned int i = 0; i < tiles->size(); i++) {
-//		if (tiles->at(i)->hitBox.intersects(aRect)) {
-//			if (tiles->at(i)->GetVisibility() == true) {
-//				return true;
-//			}
-//		}
-//	}
-//
-//	return false;
-//}

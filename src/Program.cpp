@@ -36,15 +36,12 @@ void Program::Update(double &deltaTime) {
 	//std::cout << "deltaTime = " << (float)deltaTime << "s" << std::endl;
 	//std::cout << "FPS = " << (int)(1 / deltaTime) << std::endl;
 
-	world->Update(deltaTime, window, view);
-	sf::Vector2f playerPosition = world->player->position;
-	playerPosition += sf::Vector2f(14, 14);	// Position the view into the center of the Player's hitbox
-	view->setCenter(playerPosition);
+	world->Update(deltaTime, window);
 }
 
 void Program::Draw() {
 	window->clear();
-	window->setView(*view);
+	window->setView(*world->player->view);
 	world->Draw(window);
 	window->display();
 }

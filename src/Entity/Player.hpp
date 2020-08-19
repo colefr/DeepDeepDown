@@ -11,7 +11,9 @@ public:
 	~Player();
 
 	void Update(double& deltaTime) override;
-	void Move(sf::Vector2f aDistance);
+	void Move(sf::Vector2f aDistance, double& deltaTime) override;
+
+	sf::View* view;
 
 private:
 	Animator* animator;

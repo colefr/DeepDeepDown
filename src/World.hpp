@@ -12,7 +12,7 @@ public:
 	World();
 	~World();
 
-	void Update(double& deltaTime, sf::RenderWindow* window, sf::View* view);
+	void Update(double& deltaTime, sf::RenderWindow* window);
 	void Draw(sf::RenderWindow* window);
 
 	Player* player;
@@ -20,11 +20,11 @@ public:
 	Cursor* cursor;
 
 private:
-	void MovePlayer(sf::Vector2f aDistance, double& deltaTime);
-
 	Chunk* GetChunkAt(sf::Vector2f aPosition);
 	Tile::Tile* GetTileAt(sf::Vector2f aPosition);
 	int GetTileIndexAt(sf::Vector2f aPosition);
+
+	bool CheckTileCollision(Entity* entity);
 
 	void TurnSurroundingEmptyTilesToStone(sf::Vector2f aPosition);
 };

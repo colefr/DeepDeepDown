@@ -1,10 +1,11 @@
 #include "Tile.hpp"
 
 namespace Tile {
-	Tile::Tile(sf::Vector2f& aPosition) :
+	Tile::Tile(sf::Vector2f& aPosition, bool aCollidesWithEntities) :
 		sprite(nullptr),
 		texture(nullptr),
 		position(aPosition),
+		collidesWithEntities(aCollidesWithEntities),
 		hitBox(sf::FloatRect(aPosition, sf::Vector2f(32.0f, 32.0f)))
 	{}
 

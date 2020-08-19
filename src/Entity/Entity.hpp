@@ -9,6 +9,8 @@ public:
 	virtual void Update(double& deltaTime);
 	virtual void Draw(sf::RenderWindow* window);
 
+	virtual void Move(sf::Vector2f aDistance, double& deltaTime);
+
 	sf::Sprite* sprite;
 	sf::Texture* texture;
 
