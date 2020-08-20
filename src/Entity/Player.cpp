@@ -2,12 +2,13 @@
 
 namespace Entity {
 	Player::Player() :
-		Entity(sf::Vector2f(2.0f, 2.0f), sf::Vector2f(28.0f, 28.0f), "assets/img/player.png"),
+		Entity(sf::Vector2f(4.0f, 4.0f), sf::Vector2f(24.0f, 24.0f), "assets/img/player.png"),
 		animator(new Animator(sprite, 4)),
 		bobTime(0.0f),
 		view(new sf::View(sf::Vector2f(16.0f, 16.0f), sf::Vector2f(640.0f, 480.0f)))
 	{
-		sprite->setOrigin(sf::Vector2f(2.0f, 2.0f));
+		sprite->setOrigin(sf::Vector2f(4.0f, 4.0f));
+		view->zoom(0.75f);
 	}
 
 	Player::~Player() {
@@ -37,6 +38,6 @@ namespace Entity {
 		hitBox.left = position.x;
 		hitBox.top = position.y;
 
-		view->setCenter(position + sf::Vector2f(14.0f, 14.0f));
+		view->setCenter(position + sf::Vector2f(hitBox.width * 0.5f, hitBox.height * 0.5f));
 	}
 }
