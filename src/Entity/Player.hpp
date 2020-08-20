@@ -5,17 +5,19 @@
 #include <string>
 #include <iostream>
 
-class Player : public Entity {
-public:
-	Player();
-	~Player();
+namespace Entity {
+	class Player : public Entity {
+	public:
+		Player();
+		~Player();
 
-	void Update(double& deltaTime) override;
-	void Move(sf::Vector2f aDistance, double& deltaTime) override;
+		void Update(double& deltaTime) override;
+		void Move(sf::Vector2f aDistance, double& deltaTime) override;
 
-	sf::View* view;
+		sf::View* view;
 
-private:
-	Animator* animator;
-	float bobTime;
-};
+	private:
+		Animator* animator;
+		float bobTime;
+	};
+}

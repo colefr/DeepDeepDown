@@ -36,7 +36,7 @@ Chunk::~Chunk() {
 	tiles = nullptr;
 }
 
-void Chunk::Update(double& deltaTime, Player* aPlayer) {
+void Chunk::Update(double& deltaTime, Entity::Player* aPlayer) {
 	sf::Vector2f playerPosition = aPlayer->position;
 	sf::Vector2f deltaPlayerMidpoint = playerPosition - midPoint;
 	deltaPlayerMidpoint.x *= deltaPlayerMidpoint.x;		// Square the two coordinates

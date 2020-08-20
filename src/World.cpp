@@ -3,7 +3,7 @@
 World::World() {
 	cursor = new Cursor();
 
-	player = new Player();
+	player = new Entity::Player();
 
 	chunks = new std::vector<Chunk*>;
 	chunks->push_back(new Chunk(sf::Vector2f(0, 0)));
@@ -30,8 +30,8 @@ World::~World() {
 }
 
 void World::Update(double& deltaTime, sf::RenderWindow* window) {
-	player->Update(deltaTime);
 	cursor->Update(deltaTime, window);
+	player->Update(deltaTime);	
 
 	CreateNewSurroundingChunks();
 	
@@ -208,7 +208,7 @@ void World::CreateNewSurroundingChunks() {
 	}
 }
 
-bool World::CheckTileCollision(Entity* entity) {
+bool World::CheckTileCollision(Entity::Entity* entity) {
 	sf::FloatRect entityHitBox = entity->hitBox;
 
 	for (unsigned int i = 0; i < chunks->size(); i++) {

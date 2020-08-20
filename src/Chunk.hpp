@@ -10,7 +10,7 @@ public:
 	Chunk(sf::Vector2f aMidPoint);
 	~Chunk();
 
-	void Update(double& deltaTime, Player* aPlayer);
+	void Update(double& deltaTime, Entity::Player* aPlayer);
 	void Draw(sf::RenderWindow* window);
 
 	Tile::Tile* GetTileAt(sf::Vector2f aPos);

@@ -15,7 +15,7 @@ public:
 	void Update(double& deltaTime, sf::RenderWindow* window);
 	void Draw(sf::RenderWindow* window);
 
-	Player* player;
+	Entity::Player* player;
 	std::vector<Chunk*>* chunks;
 	Cursor* cursor;
 
@@ -26,7 +26,7 @@ private:
 
 	void CreateNewSurroundingChunks();
 
-	bool CheckTileCollision(Entity* entity);
+	bool CheckTileCollision(Entity::Entity* entity);
 
 	void TurnSurroundingEmptyTilesToStone(sf::Vector2f aPosition);
 };
