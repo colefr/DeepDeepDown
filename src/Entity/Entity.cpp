@@ -1,4 +1,5 @@
 #include "Entity.hpp"
+#include "EntityList.hpp"
 
 namespace Entity {
 	Entity::Entity(sf::Vector2f aPosition, sf::Vector2f aSize, const std::string& aTextureFilePath, bool aIsVisible) :
@@ -33,5 +34,19 @@ namespace Entity {
 
 		hitBox.left = position.x;
 		hitBox.top = position.y;
+	}
+	Entity* CreateNewEntity(sf::Vector2f aPosition, EntityType aType) {
+		switch (aType)
+		{
+		case EntityType::None:
+			return nullptr;
+			break;
+		case EntityType::Player:
+			return nullptr;
+			break;
+		default:
+			return nullptr;
+			break;
+		}
 	}
 }

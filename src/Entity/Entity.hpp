@@ -2,6 +2,11 @@
 #include "SFML/Graphics.hpp"
 
 namespace Entity {
+	enum class EntityType {
+		None = 0,
+		Player
+	};
+
 	class Entity {
 	public:
 		Entity(sf::Vector2f aPosition, sf::Vector2f aSize, const std::string& aTextureFilePath, bool aIsVisible = true);
@@ -20,4 +25,6 @@ namespace Entity {
 
 		bool isVisible;
 	};
+
+	Entity* CreateNewEntity(sf::Vector2f aPosition, EntityType aType);
 }

@@ -1,4 +1,5 @@
 #include "Tile.hpp"
+#include "TileList.hpp"
 
 namespace Tile {
 	Tile::Tile(sf::Vector2f& aPosition, TileType aType, bool aCollidesWithEntities) :
@@ -33,5 +34,26 @@ namespace Tile {
 	void Empty::OnWorldEvent() {
 		changeTileTypeFlag = true;
 		typeToChangeTo = TileType::Stone;
+	}
+
+	Tile* CreateNewTile(sf::Vector2f aPosition, TileType aType)	{
+		switch (aType)
+		{
+		case TileType::Empty:
+			return new Empty(aPosition);
+			break;
+
+		case TileType::Stone:
+			return new Stone(aPosition);
+			break;
+
+		case TileType::Floor:
+			return new Floor(aPosition);
+			break;
+
+		default:
+			return nullptr;
+			break;
+		}
 	}
 }

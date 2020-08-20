@@ -29,5 +29,8 @@ namespace Item {
 
 		ItemType type;
 		bool isVisible;
+		float bobTime = 0.0f;
 	};
+
+	Item* CreateNewItem(ItemType aType, sf::Vector2f aPosition);
 }

@@ -106,23 +106,7 @@ void Chunk::SetTileType(unsigned int aTileIndex, Tile::TileType type) {
 	sf::Vector2f tilePixelPosition = tiles->at(aTileIndex)->position;
 	tiles->at(aTileIndex)->isVisible = false;
 	delete tiles->at(aTileIndex);
-
-	switch (type)
-	{
-	case Tile::TileType::Empty:
-		tiles->at(aTileIndex) = new Tile::Empty(tilePixelPosition);
-		break;
-
-	case Tile::TileType::Stone:
-		tiles->at(aTileIndex) = new Tile::Stone(tilePixelPosition);
-		break;
-
-	case Tile::TileType::Floor:
-		tiles->at(aTileIndex) = new Tile::Floor(tilePixelPosition);
-
-	default:
-		break;
-	}
+	tiles->at(aTileIndex) = Tile::CreateNewTile(tilePixelPosition, type);
 }
 
 void Chunk::CheckForTileChangeFlags() {

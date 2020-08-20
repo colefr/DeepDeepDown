@@ -38,7 +38,7 @@ World::~World() {
 
 void World::Update(double& deltaTime, sf::RenderWindow* window) {
 	cursor->Update(deltaTime, window);
-	player->Update(deltaTime);	
+	player->Update(deltaTime);
 
 	CreateNewSurroundingChunks();
 	
@@ -262,13 +262,7 @@ void World::ProcessTileDrops(Tile::Tile* aTile) {
 
 	if (aTile->dropItemFlag) {
 		if (aTile->itemTypeToDrop != Item::ItemType::None) {
-			switch (aTile->itemTypeToDrop)	{
-			default: break;
-
-			case Item::ItemType::Pebbles:
-				groundItems->push_back(new Item::Pebbles(tilePosition));
-				break;
-			}
+			groundItems->push_back(Item::CreateNewItem(aTile->itemTypeToDrop, tilePosition));
 		}
 	}
 }

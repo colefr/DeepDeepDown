@@ -52,4 +52,6 @@ namespace Tile {
 	public:
 		TileType type = TileType::Empty;
 	};
+
+	Tile* CreateNewTile(sf::Vector2f aPosition, TileType aType);
 }

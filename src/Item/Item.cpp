@@ -1,4 +1,5 @@
 #include "Item.hpp"
+#include "ItemList.hpp"
 
 namespace Item {
 	Item::Item(sf::Vector2f& aPosition, ItemType aType, const std::string& aTextureFileName, bool aIsVisible) :
@@ -22,6 +23,14 @@ namespace Item {
 	}
 
 	void Item::Update(double& deltaTime) {
+		
+		// This bit here just adds a little "bobbing" animation
+		if (isVisible) {
+			sf::Vector2f spriteOrigin = sprite->getOrigin();
+			bobTime += (4 * (float)deltaTime);
+			sf::Vector2f animationOffset = sf::Vector2f(0.0f, 0.05f * -sinf(bobTime));
+			sprite->setOrigin(spriteOrigin + animationOffset);
+		}
 	}
 
 	void Item::Draw(sf::RenderWindow* window) {
@@ -37,5 +46,22 @@ namespace Item {
 	}
 
 	void Item::OnWorldEvent() {
+	}
+
+	Item* CreateNewItem(ItemType aType, sf::Vector2f aPosition)	{
+		switch (aType)
+		{
+		case ItemType::None:
+			return nullptr;
+			break;
+
+		case ItemType::Pebbles:
+			return new Pebbles(aPosition);
+			break;
+
+		default:
+			return nullptr;
+			break;
+		}
 	}
 }

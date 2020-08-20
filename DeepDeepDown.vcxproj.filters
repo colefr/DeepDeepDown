@@ -72,6 +72,9 @@
     <ClCompile Include="src\Item\Pebbles.cpp">
       <Filter>Source Files\Item</Filter>
     </ClCompile>
+    <ClCompile Include="src\Item\ItemSlot.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Program.hpp">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="src\Entity\EntityList.hpp">
       <Filter>Source Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Item\ItemSlot.hpp">
+      <Filter>Source Files\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

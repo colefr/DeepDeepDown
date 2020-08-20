@@ -5,6 +5,8 @@
 #include "Entity/EntityList.hpp"
 #include "Item/ItemList.hpp"
 
+#include "Item/ItemSlot.hpp"
+
 #include "Cursor.hpp"
 #include "Chunk.hpp"
 #include <vector>
@@ -21,6 +23,8 @@ public:
 	std::vector<Chunk*>* chunks;
 	Cursor* cursor;
 	std::vector<Item::Item*>* groundItems;
+
+	Item::ItemSlot* testSlot;
 
 private:
 	Chunk* GetChunkAt(sf::Vector2f aPosition);
