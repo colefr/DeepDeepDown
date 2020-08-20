@@ -1,12 +1,16 @@
 #include "Tile.hpp"
 
 namespace Tile {
-	Tile::Tile(sf::Vector2f& aPosition, bool aCollidesWithEntities) :
+	Tile::Tile(sf::Vector2f& aPosition, TileType aType, bool aCollidesWithEntities) :
 		sprite(nullptr),
 		texture(nullptr),
+		hitBox(sf::FloatRect(aPosition, sf::Vector2f(32.0f, 32.0f))),		
 		position(aPosition),
-		collidesWithEntities(aCollidesWithEntities),
-		hitBox(sf::FloatRect(aPosition, sf::Vector2f(32.0f, 32.0f)))
+		isVisible(true),
+		type(aType),
+		changeTileTypeFlag(false),
+		typeToChangeTo(TileType::Empty),
+		collidesWithEntities(aCollidesWithEntities)
 	{}
 
 	void Tile::Draw(sf::RenderWindow* window) {}
@@ -19,7 +23,7 @@ namespace Tile {
 
 	// Empty Tile ------------------------------
 	Empty::Empty(sf::Vector2f& aPosition) :
-		Tile(aPosition)
+		Tile(aPosition, TileType::Empty)
 	{}
 
 	Empty::~Empty() {}

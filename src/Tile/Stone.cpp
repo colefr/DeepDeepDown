@@ -2,7 +2,7 @@
 
 namespace Tile {
 	Stone::Stone(sf::Vector2f& aPosition) :
-		StaticTile(aPosition, "assets/img/stone.png", true)
+		StaticTile(aPosition, "assets/img/stone.png", TileType::Stone, true)
 	{
 	}
 

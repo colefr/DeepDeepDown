@@ -13,7 +13,7 @@ namespace Tile {
 
 	class Tile {
 	public:
-		Tile(sf::Vector2f& aPosition, bool aCollidesWithEntities = false);
+		Tile(sf::Vector2f& aPosition, TileType aType, bool aCollidesWithEntities = false);
 
 		virtual void Draw(sf::RenderWindow* window);
 		virtual void Update(double& deltaTime);
@@ -29,11 +29,11 @@ namespace Tile {
 		sf::FloatRect hitBox;
 		sf::Vector2f position;
 
-		bool isVisible = true;
-		TileType type = TileType::Empty;
+		bool isVisible;
+		TileType type;
 
-		bool changeTileTypeFlag = false;
-		TileType typeToChangeTo = TileType::Empty;
+		bool changeTileTypeFlag;
+		TileType typeToChangeTo;
 
 		bool collidesWithEntities = false;
 	};

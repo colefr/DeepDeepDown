@@ -44,11 +44,13 @@ void World::Update(double& deltaTime, sf::RenderWindow* window) {
 		Tile::Tile* clickedTile = GetTileAt(mousePos);
 
 		if (clickedTile != nullptr) {
+			// If Stone is broken and there are adjacent Empty tiles, the Empty tiles become Stone tiles
+			if (clickedTile->type == Tile::TileType::Stone) {
+				TurnSurroundingEmptyTilesToStone(clickedTile->position);
+			}
+
 			// Process OnLeftClick() events for that tile
 			clickedTile->OnLeftClick(cursor);
-
-			// If Stone is broken and there are adjacent Empty tiles, the Empty tiles become Stone tiles
-			TurnSurroundingEmptyTilesToStone(clickedTile->position);
 		}
 	}
 

@@ -10,8 +10,5 @@ namespace Tile {
 
 		void OnLeftClick(Cursor* cursor) override;
 		void OnRightClick(Cursor* cursor) override;
-
-	public:
-		TileType type = TileType::Stone;
 	};
 }

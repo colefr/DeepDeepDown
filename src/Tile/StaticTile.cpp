@@ -1,8 +1,8 @@
 #include "StaticTile.hpp"
 
 namespace Tile {
-	StaticTile::StaticTile(sf::Vector2f aPosition, const std::string& aTextureFileName, bool aCollidesWithEntities) :
-		Tile(aPosition, aCollidesWithEntities)
+	StaticTile::StaticTile(sf::Vector2f aPosition, const std::string& aTextureFileName, TileType aType, bool aCollidesWithEntities) :
+		Tile(aPosition, aType, aCollidesWithEntities)
 	{
 		texture = new sf::Texture();
 		texture->loadFromFile(aTextureFileName);
