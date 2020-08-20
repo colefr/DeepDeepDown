@@ -32,6 +32,8 @@ World::~World() {
 void World::Update(double& deltaTime, sf::RenderWindow* window) {
 	player->Update(deltaTime);
 	cursor->Update(deltaTime, window);
+
+	CreateNewSurroundingChunks();
 	
 	for (unsigned int i = 0; i < chunks->size(); i++) {
 		chunks->at(i)->Update(deltaTime, player);
@@ -137,6 +139,71 @@ int World::GetTileIndexAt(sf::Vector2f aPosition) {
 	}
 
 	return -1;
+}
+
+void World::CreateNewSurroundingChunks() {
+	sf::Vector2f chunkMidPoint = GetChunkAt(player->position)->midPoint;
+	sf::Vector2f newChunkOffset;
+	Chunk* testChunk = nullptr;
+
+	// Check if there's a chunk [Direction] of the chunk the player is in
+	// If there isn't, create a new empty chunk.
+
+	// North (-y)
+	newChunkOffset = sf::Vector2f(0, -512);
+	testChunk = GetChunkAt(chunkMidPoint + newChunkOffset);
+	if (testChunk == nullptr) {
+		chunks->push_back(new Chunk(chunkMidPoint + newChunkOffset));
+	}
+
+	// South (+y)
+	newChunkOffset = sf::Vector2f(0, +512);
+	testChunk = GetChunkAt(chunkMidPoint + newChunkOffset);
+	if (testChunk == nullptr) {
+		chunks->push_back(new Chunk(chunkMidPoint + newChunkOffset));
+	}
+
+	// West (-x)
+	newChunkOffset = sf::Vector2f(-512, 0);
+	testChunk = GetChunkAt(chunkMidPoint + newChunkOffset);
+	if (testChunk == nullptr) {
+		chunks->push_back(new Chunk(chunkMidPoint + newChunkOffset));
+	}
+
+	// East(+x)
+	newChunkOffset = sf::Vector2f(512, 0);
+	testChunk = GetChunkAt(chunkMidPoint + newChunkOffset);
+	if (testChunk == nullptr) {
+		chunks->push_back(new Chunk(chunkMidPoint + newChunkOffset));
+	}
+
+	// North-West (-x, -y)
+	newChunkOffset = sf::Vector2f(-512, -512);
+	testChunk = GetChunkAt(chunkMidPoint + newChunkOffset);
+	if (testChunk == nullptr) {
+		chunks->push_back(new Chunk(chunkMidPoint + newChunkOffset));
+	}
+
+	// North-East (+x, -y)
+	newChunkOffset = sf::Vector2f(+512, -512);
+	testChunk = GetChunkAt(chunkMidPoint + newChunkOffset);
+	if (testChunk == nullptr) {
+		chunks->push_back(new Chunk(chunkMidPoint + newChunkOffset));
+	}
+
+	// South-West (-x, +y)
+	newChunkOffset = sf::Vector2f(-512, +512);
+	testChunk = GetChunkAt(chunkMidPoint + newChunkOffset);
+	if (testChunk == nullptr) {
+		chunks->push_back(new Chunk(chunkMidPoint + newChunkOffset));
+	}
+
+	// South-East (+x, +y)
+	newChunkOffset = sf::Vector2f(+512, +512);
+	testChunk = GetChunkAt(chunkMidPoint + newChunkOffset);
+	if (testChunk == nullptr) {
+		chunks->push_back(new Chunk(chunkMidPoint + newChunkOffset));
+	}
 }
 
 bool World::CheckTileCollision(Entity* entity) {

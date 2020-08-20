@@ -24,6 +24,8 @@ private:
 	Tile::Tile* GetTileAt(sf::Vector2f aPosition);
 	int GetTileIndexAt(sf::Vector2f aPosition);
 
+	void CreateNewSurroundingChunks();
+
 	bool CheckTileCollision(Entity* entity);
 
 	void TurnSurroundingEmptyTilesToStone(sf::Vector2f aPosition);
