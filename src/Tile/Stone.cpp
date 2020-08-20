@@ -7,6 +7,9 @@ namespace Tile {
 	}
 
 	void Stone::OnLeftClick(Cursor* cursor)	{
+		dropItemFlag = true;
+		itemTypeToDrop = Item::ItemType::Pebbles;
+
 		changeTileTypeFlag = true;
 		typeToChangeTo = TileType::Floor;
 	}

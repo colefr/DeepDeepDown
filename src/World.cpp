@@ -13,8 +13,9 @@ World::World() {
 	chunks->at(0)->SetTileType(137, Tile::TileType::Stone);
 	chunks->at(0)->SetTileType(152, Tile::TileType::Stone);
 	chunks->at(0)->SetTileType(120, Tile::TileType::Stone);
-
 	chunks->at(0)->SetTileType(136, Tile::TileType::Floor);
+
+	groundItems = new std::vector<Item::Item*>;
 }
 
 World::~World() {
@@ -25,6 +26,12 @@ World::~World() {
 	}
 	chunks->clear();
 	delete chunks;
+
+	for (unsigned int i = 0; i < groundItems->size(); i++) {
+		delete groundItems->at(i);
+	}
+	groundItems->clear();
+	delete groundItems;
 
 	delete cursor;
 }
@@ -39,6 +46,10 @@ void World::Update(double& deltaTime, sf::RenderWindow* window) {
 		chunks->at(i)->Update(deltaTime, player);
 	}
 
+	for (unsigned int i = 0; i < groundItems->size(); i++) {
+		groundItems->at(i)->Update(deltaTime);
+	}
+
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		sf::Vector2f mousePos = sf::Vector2f(cursor->GetPosition());
 		Tile::Tile* clickedTile = GetTileAt(mousePos);
@@ -51,6 +62,9 @@ void World::Update(double& deltaTime, sf::RenderWindow* window) {
 
 			// Process OnLeftClick() events for that tile
 			clickedTile->OnLeftClick(cursor);
+
+			// Process Tile drops
+			ProcessTileDrops(clickedTile);
 		}
 	}
 
@@ -96,11 +110,17 @@ void World::Update(double& deltaTime, sf::RenderWindow* window) {
 			player->Move(sf::Vector2f(-320, 0), deltaTime);
 		}
 	}
+
+	CheckGroundItemCollision(player);
 }
 
 void World::Draw(sf::RenderWindow* window) {	
 	for (unsigned int i = 0; i < chunks->size(); i++) {
 		chunks->at(i)->Draw(window);
+	}
+
+	for (unsigned int i = 0; i < groundItems->size(); i++) {
+		groundItems->at(i)->Draw(window);
 	}
 
 	player->Draw(window);
@@ -226,6 +246,31 @@ bool World::CheckTileCollision(Entity::Entity* entity) {
 	}
 
 	return false;
+}
+
+void World::CheckGroundItemCollision(Entity::Entity* entity) {
+	for (unsigned int i = 0; i < groundItems->size(); i++) {
+		if (entity->hitBox.intersects(groundItems->at(i)->hitBox)) {
+			delete groundItems->at(i);
+			groundItems->erase(groundItems->begin() + i);
+		}
+	}
+}
+
+void World::ProcessTileDrops(Tile::Tile* aTile) {
+	sf::Vector2f tilePosition = aTile->position;
+
+	if (aTile->dropItemFlag) {
+		if (aTile->itemTypeToDrop != Item::ItemType::None) {
+			switch (aTile->itemTypeToDrop)	{
+			default: break;
+
+			case Item::ItemType::Pebbles:
+				groundItems->push_back(new Item::Pebbles(tilePosition));
+				break;
+			}
+		}
+	}
 }
 
 void World::TurnSurroundingEmptyTilesToStone(sf::Vector2f aPosition) {

@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "../Cursor.hpp"
+#include "../Item/Item.hpp"
 #include <string>
 #include <iostream>
 
@@ -35,7 +36,10 @@ namespace Tile {
 		bool changeTileTypeFlag;
 		TileType typeToChangeTo;
 
-		bool collidesWithEntities = false;
+		bool dropItemFlag;
+		Item::ItemType itemTypeToDrop;
+
+		bool collidesWithEntities;
 	};
 
 	class Empty : public Tile {

@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Tile">
       <UniqueIdentifier>{023cfe04-eac3-4ef6-bbcd-60c6bc0019f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Item">
+      <UniqueIdentifier>{ba1b469d-d349-46f0-8561-aacbb006e254}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -63,6 +66,12 @@
     <ClCompile Include="src\Entity\Entity.cpp">
       <Filter>Source Files\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="src\Item\Item.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Item\Pebbles.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Program.hpp">
@@ -103,6 +112,21 @@
     </ClInclude>
     <ClInclude Include="src\Tile\Floor.hpp">
       <Filter>Source Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Item\Item.hpp">
+      <Filter>Source Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Item\Pebbles.hpp">
+      <Filter>Source Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Item\ItemList.hpp">
+      <Filter>Source Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tile\TileList.hpp">
+      <Filter>Source Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity\EntityList.hpp">
+      <Filter>Source Files\Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

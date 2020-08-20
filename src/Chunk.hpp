@@ -1,9 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Entity/Player.hpp"
-#include "Tile/Tile.hpp"
-#include "Tile/Stone.hpp"
-#include "Tile/Floor.hpp"
+#include "Tile/TileList.hpp"
 
 class Chunk {
 public:
@@ -16,6 +14,7 @@ public:
 	Tile::Tile* GetTileAt(sf::Vector2f aPos);
 	int GetTileIndexAt(sf::Vector2f aPos);
 	sf::Vector2i GetTileIndexVectorAt(sf::Vector2f aPos);
+
 	void SetTileType(unsigned int aTileIndex, Tile::TileType type);
 
 public:

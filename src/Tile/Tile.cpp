@@ -10,6 +10,8 @@ namespace Tile {
 		type(aType),
 		changeTileTypeFlag(false),
 		typeToChangeTo(TileType::Empty),
+		dropItemFlag(false),
+		itemTypeToDrop(Item::ItemType::None),
 		collidesWithEntities(aCollidesWithEntities)
 	{}
 

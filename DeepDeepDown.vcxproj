@@ -153,6 +153,8 @@
     <ClCompile Include="src\Cursor.cpp" />
     <ClCompile Include="src\Entity\Entity.cpp" />
     <ClCompile Include="src\Entity\Player.cpp" />
+    <ClCompile Include="src\Item\Item.cpp" />
+    <ClCompile Include="src\Item\Pebbles.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Program.cpp" />
     <ClCompile Include="src\Tile\AnimatedTile.cpp" />
@@ -168,13 +170,18 @@
     <ClInclude Include="src\Chunk.hpp" />
     <ClInclude Include="src\Cursor.hpp" />
     <ClInclude Include="src\Entity\Entity.hpp" />
+    <ClInclude Include="src\Entity\EntityList.hpp" />
     <ClInclude Include="src\Entity\Player.hpp" />
+    <ClInclude Include="src\Item\Item.hpp" />
+    <ClInclude Include="src\Item\ItemList.hpp" />
+    <ClInclude Include="src\Item\Pebbles.hpp" />
     <ClInclude Include="src\Program.hpp" />
     <ClInclude Include="src\Tile\AnimatedTile.hpp" />
     <ClInclude Include="src\Tile\Floor.hpp" />
     <ClInclude Include="src\Tile\StaticTile.hpp" />
     <ClInclude Include="src\Tile\Stone.hpp" />
     <ClInclude Include="src\Tile\Tile.hpp" />
+    <ClInclude Include="src\Tile\TileList.hpp" />
     <ClInclude Include="src\Timer.hpp" />
     <ClInclude Include="src\World.hpp" />
   </ItemGroup>

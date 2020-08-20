@@ -1,8 +1,10 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "Tile/StaticTile.hpp"
-#include "Tile/AnimatedTile.hpp"
-#include "Entity/Player.hpp"
+
+#include "Tile/TileList.hpp"
+#include "Entity/EntityList.hpp"
+#include "Item/ItemList.hpp"
+
 #include "Cursor.hpp"
 #include "Chunk.hpp"
 #include <vector>
@@ -18,6 +20,7 @@ public:
 	Entity::Player* player;
 	std::vector<Chunk*>* chunks;
 	Cursor* cursor;
+	std::vector<Item::Item*>* groundItems;
 
 private:
 	Chunk* GetChunkAt(sf::Vector2f aPosition);
@@ -27,6 +30,8 @@ private:
 	void CreateNewSurroundingChunks();
 
 	bool CheckTileCollision(Entity::Entity* entity);
+	void CheckGroundItemCollision(Entity::Entity* entity);
 
+	void ProcessTileDrops(Tile::Tile* aTile);
 	void TurnSurroundingEmptyTilesToStone(sf::Vector2f aPosition);
 };
