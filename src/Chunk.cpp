@@ -41,15 +41,10 @@ void Chunk::Update(double& deltaTime, Entity::Player* aPlayer) {
 	sf::Vector2f deltaPlayerMidpoint = playerPosition - midPoint;
 	deltaPlayerMidpoint.x *= deltaPlayerMidpoint.x;		// Square the two coordinates
 	deltaPlayerMidpoint.y *= deltaPlayerMidpoint.y;
-	float midPointToPlayerDistace = sqrtf(deltaPlayerMidpoint.x + deltaPlayerMidpoint.y);
+	float midPointToPlayerDistace = deltaPlayerMidpoint.x + deltaPlayerMidpoint.y;
 
-	// Set the isActive and isVisible flags based on the chunk's proximity to the player
-	if (midPointToPlayerDistace <= activeDistance) {
-		isActive = true;
-	}
-	else isActive = false;
-
-	if (midPointToPlayerDistace <= renderDistance) {
+	// Set the isVisible flag based on the chunk's proximity to the player
+	if (midPointToPlayerDistace <= powf(renderDistance, 2)) {
 		isVisible = true;
 	}
 	else isVisible = false;

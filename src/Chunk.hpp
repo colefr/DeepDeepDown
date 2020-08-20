@@ -22,13 +22,10 @@ public:
 	// Width and length of a chunk in Tiles
 	const int chunkSizeInTiles = 16;
 	const float tileSize = 32;
-	const float chunkSizeInPixels = chunkSizeInTiles * tileSize;	
-
-	// Maximum distance from midpoint of chunk to player for chunk to be Active
-	const float activeDistance = 800;
+	const float chunkSizeInPixels = chunkSizeInTiles * tileSize;
 
 	// Maximum distance from midpoint of chunk to player for chunk to be drawn
-	const float renderDistance = 800;
+	const float renderDistance = 512;
 
 	std::vector<Tile::Tile*>* tiles;
 
