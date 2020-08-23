@@ -16,10 +16,13 @@ World::World() {
 	chunks->at(0)->SetTileType(136, Tile::TileType::Floor);
 
 	groundItems = new std::vector<Item::Item*>;
+
+	inventory = new Inventory();
 }
 
 World::~World() {
 	delete player;
+	delete inventory;
 
 	for (unsigned int i = 0; i < chunks->size(); i++) {
 		delete chunks->at(i);
@@ -37,8 +40,10 @@ World::~World() {
 }
 
 void World::Update(double& deltaTime, sf::RenderWindow* window) {
-	cursor->Update(deltaTime, window);
+
+	inventory->Update(deltaTime, player->view);
 	player->Update(deltaTime);
+	cursor->Update(deltaTime, window);
 
 	CreateNewSurroundingChunks();
 	
@@ -124,6 +129,7 @@ void World::Draw(sf::RenderWindow* window) {
 	}
 
 	player->Draw(window);
+	inventory->Draw(window);
 	cursor->Draw(window);
 }
 

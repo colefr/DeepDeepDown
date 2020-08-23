@@ -8,7 +8,7 @@ namespace Entity {
 		view(new sf::View(sf::Vector2f(16.0f, 16.0f), sf::Vector2f(640.0f, 480.0f)))
 	{
 		sprite->setOrigin(sf::Vector2f(4.0f, 4.0f));
-		view->zoom(0.75f);
+		//view->zoom(0.75f);
 	}
 
 	Player::~Player() {
@@ -28,6 +28,11 @@ namespace Entity {
 		bobTime += (2 * (float)deltaTime);
 		sf::Vector2f animationOffset = sf::Vector2f(0.0f, 0.05f * -sinf(bobTime));
 		sprite->setOrigin(spriteOrigin + animationOffset);
+	}
+
+	void Player::Draw(sf::RenderWindow* window) {
+		window->setView(*view);
+		window->draw(*sprite);
 	}
 
 	void Player::Move(sf::Vector2f aDistance, double& deltaTime) {

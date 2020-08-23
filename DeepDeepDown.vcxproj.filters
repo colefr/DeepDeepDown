@@ -75,6 +75,9 @@
     <ClCompile Include="src\Item\ItemSlot.cpp">
       <Filter>Source Files\Item</Filter>
     </ClCompile>
+    <ClCompile Include="src\Inventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Program.hpp">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="src\Item\ItemSlot.hpp">
       <Filter>Source Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Inventory.hpp">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -153,6 +153,7 @@
     <ClCompile Include="src\Cursor.cpp" />
     <ClCompile Include="src\Entity\Entity.cpp" />
     <ClCompile Include="src\Entity\Player.cpp" />
+    <ClCompile Include="src\Inventory.cpp" />
     <ClCompile Include="src\Item\Item.cpp" />
     <ClCompile Include="src\Item\ItemSlot.cpp" />
     <ClCompile Include="src\Item\Pebbles.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="src\Entity\Entity.hpp" />
     <ClInclude Include="src\Entity\EntityList.hpp" />
     <ClInclude Include="src\Entity\Player.hpp" />
+    <ClInclude Include="src\Inventory.hpp" />
     <ClInclude Include="src\Item\Item.hpp" />
     <ClInclude Include="src\Item\ItemList.hpp" />
     <ClInclude Include="src\Item\ItemSlot.hpp" />

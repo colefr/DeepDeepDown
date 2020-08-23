@@ -12,6 +12,8 @@ namespace Entity {
 		~Player();
 
 		void Update(double& deltaTime) override;
+		void Draw(sf::RenderWindow* window) override;
+
 		void Move(sf::Vector2f aDistance, double& deltaTime) override;
 
 		sf::View* view;

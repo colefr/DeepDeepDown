@@ -20,11 +20,16 @@ namespace Item {
 	}
 
 	void ItemSlot::Update(double& deltaTime) {
-		item->Update(deltaTime);
+		if (item != nullptr) {
+			item->Update(deltaTime);
+		}
 	}
 
 	void ItemSlot::Draw(sf::RenderWindow* window) {
 		window->draw(*frameSprite);
-		item->Draw(window);
+
+		if (item != nullptr) {
+			item->Draw(window);
+		}
 	}
 }

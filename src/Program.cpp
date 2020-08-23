@@ -7,15 +7,11 @@ Program::Program() {
 	window->setMouseCursorVisible(false);
 
 	world = new World();
-
-	view = new sf::View(window->getView());
-	view->zoom(0.5f);
 }
 
 Program::~Program() {
 	delete window;
 	delete world;
-	delete view;
 }
 
 void Program::HandleEvents() {
@@ -41,7 +37,6 @@ void Program::Update(double &deltaTime) {
 
 void Program::Draw() {
 	window->clear();
-	window->setView(*world->player->view);
 	world->Draw(window);
 	window->display();
 }
